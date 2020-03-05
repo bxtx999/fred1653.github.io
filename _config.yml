@@ -51,6 +51,9 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
+pandoc:
+  mathEngine: katex
+    
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
