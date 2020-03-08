@@ -53,7 +53,9 @@ highlight:
   hljs: false
 pandoc:
   mathEngine: katex
-    
+katex:
+  css: true
+  throw_on_error: false
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
