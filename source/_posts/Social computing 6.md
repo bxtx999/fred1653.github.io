@@ -11,6 +11,8 @@ tags: ["社会计算", "博弈论"]
    
    + 公路交通网
 
+<!-- more -->
+
 2. 网络中的博弈
    
    ![](https://cdn.jsdelivr.net/gh/fred1653/Image-Hosting/img/20200402113344.png)

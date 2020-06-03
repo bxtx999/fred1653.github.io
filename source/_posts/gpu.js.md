@@ -18,6 +18,8 @@ desc: gpu.js 记录
    // gpu 
    ```
 
+<!-- more -->
+
 2. 输出
 
    * output：

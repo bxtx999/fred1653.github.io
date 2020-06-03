@@ -15,6 +15,8 @@ tags: ["算法", "Python"]
 > **Note**:
 You may assume that all inputs are consist of lowercase letters `a-z`.
 
+<!-- more -->
+
 #### 二、Python实现
 
 ```Python
