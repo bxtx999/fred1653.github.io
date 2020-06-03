@@ -1,7 +1,7 @@
+---
 title: about
-date: 2016-03-16 16:42:22
-type: "about"
-comments: false
+date: 2020-02-23 19:20:33
+layout: about
 ---
 
 
