@@ -1,6 +1,6 @@
 ---
 title: Image processing using Graph_2
-date: 2017-12-27 10:00:18
+date: "2017-12-27 10:00:18"
 categories: "图象处理"
 tags: ['image processing', '图像处理']
 desc: 图像处理第二节笔记

@@ -1,6 +1,6 @@
 ---
 title: Social computing 2 —— 社会选择与社会影响
-date: 2020-03-05 19:53:14
+date: "2020-03-05 19:53:14"
 categories: "社会计算"
 tags: ["社会计算"]
 ---
