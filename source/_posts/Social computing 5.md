@@ -1,6 +1,7 @@
 ---
 title: Social computing 5 —— 博弈论
 date: 2020-04-02 13:59:20
+categories: "社会计算"
 tags: ["社会计算", "博弈论"]
 ---
 

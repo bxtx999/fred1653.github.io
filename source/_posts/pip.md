@@ -1,6 +1,7 @@
 ---
 title: pip 安装包指定头文件和静态库目录
 date: 2018-04-24 16:09:02
+categories: "Python"
 tags: ["pip"]
 desc: 在pip中使用build_ext标识指定编译的目录
 ---

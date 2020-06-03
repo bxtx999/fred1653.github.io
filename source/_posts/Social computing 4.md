@@ -1,5 +1,6 @@
 ---
 title: Social Computing 4 —— 万维网结构、链接分析与网络搜索
+categories: "社会计算"
 date: 2020-03-12 23:19:37
 tags: ["社会计算", "有向图", "网页排序"]
 ---

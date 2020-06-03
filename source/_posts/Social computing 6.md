@@ -1,5 +1,6 @@
 ---
 title: Social computing 6 —— 网络流量的博弈
+categories: "社会计算"
 date: 2020-04-02 14:00:55
 tags: ["社会计算", "博弈论"]
 ---
