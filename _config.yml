@@ -51,11 +51,23 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
+
 pandoc:
   mathEngine: katex
+
 katex:
   css: true
   throw_on_error: false
+
+# math:
+#   engine: katex
+#   katex:
+#     css: https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css
+#     js: https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js
+#     config:
+#       # KaTeX config
+#       throwOnError: false
+#       errorColor: "#cc0000"
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -79,10 +91,10 @@ meta_generator: true
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
-date_format: yyyy-MM-DD
+date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+use_date_for_updated: true
 
 # Pagination
 ## Set per_page to 0 to disable pagination
