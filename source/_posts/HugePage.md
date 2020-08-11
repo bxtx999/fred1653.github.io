@@ -18,6 +18,8 @@ desc: Linux系统中使用 Huge Page。
    | ia64  | 4K, 8K, 64K, 256K, 1M, 4M, 16M, 256M                                                         |
    | ppc64 | 4K, 16M                                                                                      |
 
+  <!-- more -->
+
 2. Huge Page 支持 `mmap` 和 `shmget`、`shmat` 调用。
 
 3. 当前系统 Huge Page 设置信息
