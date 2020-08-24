@@ -97,7 +97,7 @@ tags: ["社会计算"]
 
 3. 计算：
    
-   ![](https://cdn.jsdelivr.net/gh/fred1653/Image-Hosting/img/微信图片_20200305184134.png)
+   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/微信图片_20200305184134.png)
    
    + 节点数 n = 9
    
@@ -165,7 +165,7 @@ tags: ["社会计算"]
 
 4. 从属网络
    
-   ![](https://cdn.jsdelivr.net/gh/fred1653/Image-Hosting/img/20200305191401.png)
+   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200305191401.png)
 
 5. 社会交往
    
@@ -209,7 +209,7 @@ tags: ["社会计算"]
 
 4. 社会归属网：描述从属关系与社会关系
    
-   ![](https://cdn.jsdelivr.net/gh/fred1653/Image-Hosting/img/20200305192243.png)
+   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200305192243.png)
    
    + 在现实社会中，选择与影响似乎很难明确区分，实际是交替甚至同时发生的现象，同质性是两种共同机制的结果
      
@@ -219,7 +219,7 @@ tags: ["社会计算"]
    
    + 社会归属网：三类闭包
      
-     ![](https://cdn.jsdelivr.net/gh/fred1653/Image-Hosting/img/20200305192448.png)
+     ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200305192448.png)
    
    + 社团闭包的验证
      
@@ -273,7 +273,7 @@ tags: ["社会计算"]
 
 4. 相似性、选择与社会影响
    
-   ![](https://cdn.jsdelivr.net/gh/fred1653/Image-Hosting/img/20200305193640.png)
+   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200305193640.png)
 
 5. 小结
    
@@ -287,7 +287,7 @@ tags: ["社会计算"]
    
    芝加哥，黑人在居住区的比例变化图
    
-   ![](https://cdn.jsdelivr.net/gh/fred1653/Image-Hosting/img/20200305194011.png)
+   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200305194011.png)
 
 2. 同质性动态
    
