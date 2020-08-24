@@ -126,7 +126,7 @@ archive_generator:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: 'git'
-  repo: git@github.com:fred1653/fred1653.github.io.git
+  repo: git@github.com:bxtx999/bxtx999.github.io.git
   branch: master
   message:
 
