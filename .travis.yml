@@ -2,13 +2,13 @@ language: node_js # 编译语言、环境
 
 sudo: required # 需要管理员权限
 
-addons:
-  apt_packages:
-    - pandoc
-
-dist: xenial # 指定 CI 系统版本为 Ubuntu16.04 LTS
+dist: bionic # 指定 CI 系统版本为 Ubuntu18.04 LTS
 
 node_js: stable #Node.js 版本
+
+before_script:
+  - wget https://github.com/jgm/pandoc/releases/download/2.7/pandoc-2.7-1-amd64.deb
+  - dpkg -i ./pandoc-2.7-1-amd64.deb
 
 branches:
   only:
