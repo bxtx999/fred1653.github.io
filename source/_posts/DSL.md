@@ -26,7 +26,7 @@ DSL 的类型：
 
 - 异构
 
-  GLSL 
+  GLSL
 
 - 特殊应用
 
@@ -67,7 +67,7 @@ Embedded domain-specific language（eDSL）是嵌入式DSL，其优势是利用�
       { name :: String
       , age  :: Int
       }
-   
+
   main :: IO ()
   main = putStrLn $ renderHtml [shamlet|
   <p>Hello, my name is #{name person} and I am #{show $ age person}.
@@ -80,22 +80,22 @@ Embedded domain-specific language（eDSL）是嵌入式DSL，其优势是利用�
       person = Person "Michael" 26
   ```
 
-- 组合Combinators 
+- 组合Combinators
 
   Combinators 是利用小函数或者对象进行构建，因为没有自定义语法，所以很像 API。
 
-  例如，Ruby的Rake构建系统对`.md`文件运行`pandoc `生成`.html`文件。
+  例如，Ruby的Rake构建系统对`.md`文件运行`pandoc`生成`.html`文件。
 
   ```ruby
   task :default => :html
   task :html => %W[ch1.html ch2.html ch3.html]
-   
+
   rule ".html" => ".md" do |t|
     sh "pandoc -o #{http://t.name} #{t.source}"
   end
   ```
 
-- Monads 
+- Monads
 
   在Haskell 中可以利用 Monad 来实现 eDSL。
 
@@ -107,15 +107,13 @@ Embedded domain-specific language（eDSL）是嵌入式DSL，其优势是利用�
               return (a, b)
   ```
 
-  
-
 eDSL 因为能够用于处理专用领域中的问题，所以用处极大。但是在DSL设计和使用中，应该注重在实现上使用恰当的语法。同时，对于DSL解决的问题可能是“动态逻辑加载”，可以使用现有语言动态调用解析器来完成。
 
 库（library）和 eDSL 很相似，有时候最简单的库就能够解决问题。
 
 > **Embedded DSLs are useful because they let us apply everything we know about programming languages to specific domains.** 
 
-### 参考：
+### 参考
 
 1. [What is an embedded domain-specific language?](https://www.quora.com/What-is-an-embedded-domain-specific-language)
 
@@ -126,9 +124,3 @@ eDSL 因为能够用于处理专用领域中的问题，所以用处极大。但
 4. [领域专用语言迷思](http://www.infoq.com/cn/articles/dsl-discussion)
 
 5. [DSL在实际工作中的应用](http://jyiigpgf.github.io/dsl/2015/02/09/DSL%E5%9C%A8%E5%AE%9E%E9%99%85%E5%B7%A5%E4%BD%9C%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html)
-
-
-   
-
-   
-
