@@ -9,7 +9,7 @@ description: '记录我的科研学习'
 keywords: 'CS'
 author: Jianan Hu
 language: zh-cmn-Hans
-timezone: 'Asia/Chongqing'
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
