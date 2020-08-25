@@ -2,9 +2,9 @@ language: node_js # 编译语言、环境
 
 sudo: required # 需要管理员权限
 
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y pandoc
+addons:
+  apt_packages:
+    - pandoc
 
 dist: xenial # 指定 CI 系统版本为 Ubuntu16.04 LTS
 
