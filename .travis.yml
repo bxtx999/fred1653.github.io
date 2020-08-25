@@ -6,9 +6,9 @@ dist: bionic # 指定 CI 系统版本为 Ubuntu18.04 LTS
 
 node_js: stable #Node.js 版本
 
-before_script:
-  - wget https://github.com/jgm/pandoc/releases/download/2.7/pandoc-2.7-1-amd64.deb
-  - dpkg -i ./pandoc-2.7-1-amd64.deb
+addons:
+  apt_packages:
+    - pandoc
 
 branches:
   only:
