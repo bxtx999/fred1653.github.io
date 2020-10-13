@@ -7,8 +7,7 @@ tags: ["算法", "Python"]
 
 接着上一篇[字典树结构](http://hoooo.org/2016/04/25/Trie%E5%AD%97%E5%85%B8%E6%A0%91/)的讲解，我们接着使用`C++`和`Python`来实现字典树。
 
-
-#### 一、LeetCode的字典树
+## 一、LeetCode的字典树
 
  在[LeetCode 208](https://leetcode.com/problems/implement-trie-prefix-tree/) 要求实现字典树。
 
@@ -18,7 +17,7 @@ You may assume that all inputs are consist of lowercase letters `a-z`.
 
 <!-- more -->
 
-#### 二、Python实现
+## 二、Python实现
 
 ```Python
 # coding:utf-8
@@ -124,13 +123,9 @@ print trie.get_start('some')
 
 ```
 
-##### 结构
-![插入数据后的结构](http://img.blog.csdn.net/20160426235337743)
+### 输出
 
-
-##### 输出
-
-```
+```python
 # print trie.search("key")
 False
 # print trie.search("somebody3")
@@ -141,22 +136,8 @@ True
 
 采用`Class`来实现字典树：https://github.com/bdimmick/python-trie/blob/master/trie.py
 
-#### 三、C++实现
-
-
-##### _TODO_
-
-
-
-#### 四、字典树的应用
-
-1. 搜索框的自动完成功能
-  ![搜索框的自动完成功能](http://img.blog.csdn.net/20160426233508001) 
-1. T9输入的自动联想
-![联想功能](http://img.blog.csdn.net/20160426233551298)
-
+## 三、C++实现
 
 ---------
 
 [1]: https://leetcode.com/articles/implement-trie-prefix-tree/
-

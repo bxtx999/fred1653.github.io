@@ -15,7 +15,7 @@ desc: gpu.js 记录
    // gpu, cpu
    const gpu = new GPU({ mode: mode });
    console.log(gpu.getMode());
-   // gpu 
+   // gpu
    ```
 
 <!-- more -->
@@ -56,7 +56,7 @@ desc: gpu.js 记录
    })
      .setGraphical(true)
      .setOutput([100]);
-       
+
    myFunc([1, 2, 3]);
    // Result: colorful image
    ```
@@ -65,7 +65,7 @@ desc: gpu.js 记录
 
 5. 使用流水线，即在GPU中保存值。
 
-   可以调用`outputToTexture: boolean ` 或者 `kernel.setOutputToTexture(true) `
+   可以调用 `outputToTexture: boolean ` 或者 `kernel.setOutputToTexture(true) `
 
    ```javascript
    const importAsTexture = gpu.createKernel(function(value) {
@@ -73,21 +73,21 @@ desc: gpu.js 记录
    })
        .setOutput([512, 512])
        .setOutputToTexture(true);
-   
+
    const texture = importAsTexture([1, 2]);
    // console.log(texture);
    ```
+
    ![存储在内存中的texture](https://i.loli.net/2018/06/08/5b19e936e027a.png)
 
 6. Gpu.js 处理图片 https://github.com/gpujs/gpu.js/issues/278
 
 7. 输出数组
 
-   ```
+   ```javascript
    const k = gpu.createKernel(function () {
      return this.thread.x % 2;
    }).setOutput([6, 2, 1]);
-   
    console.log(k());
    ```
 
@@ -95,18 +95,18 @@ desc: gpu.js 记录
 
 8. 添加额外的定制函数
 
-   `addFunction` 
+   `addFunction`
 
    ```javascript
    gpu.addFunction(function mySuperFunction(a, b) {
-   	return a - b;
+   	 return a - b;
    });
    function anotherFunction(value) {
-   	return value + 1;
+   	 return value + 1;
    }
    gpu.addFunction(anotherFunction);
    const kernel = gpu.createKernel(function(a, b) {
-   	return anotherFunction(mySuperFunction(a[this.thread.x], b[this.thread.x]));
+   	 return anotherFunction(mySuperFunction(a[this.thread.x], b[this.thread.x]));
    }).setOutput([20]);
    ```
 
@@ -114,16 +114,14 @@ desc: gpu.js 记录
 
    ```javascript
    function mySuperFunction(a, b) {
-   	return a - b;
+   	 return a - b;
    }
    const kernel = gpu.createKernel(function(a, b) {
-   	return mySuperFunction(a[this.thread.x], b[this.thread.x]);
+    	return mySuperFunction(a[this.thread.x], b[this.thread.x]);
    })
      .setOutput([20])
      .setFunctions([mySuperFunction]);
    ```
-
-   
 
 9.  传递常量
 
@@ -146,29 +144,27 @@ desc: gpu.js 记录
 
    ```javascript
    import GPU, { input } from 'gpu.js';
-   
+
    function run() {
      const gpu = new GPU({
        mode: 'cpu'
      });
-   
+
      const opt = { output: [3, 3] };
      const kernel = gpu.createKernel(function(values) {
        return values[this.thread.x] + values[this.thread.y];
      }, opt);
-   
-   
+
      const gpuInput = input(new Float32Array([2, 4, 6, 1, 3, 5, 8, 10, 12]), [3, 3]);
      const output = kernel(gpuInput);
      console.log(output);
    }
-   
    run();
    ```
 
    in GPU mode:
 
-   ```
+   ```javascript
    (3) [Array(3), Array(3), Array(3)]
    0:(3) [4, 6, 8]
    1:(3) [6, 8, 10]
@@ -187,51 +183,45 @@ desc: gpu.js 记录
    >
    > https://github.com/gpujs/gpu.js/issues/243
 
-   
-
 11. CPU 、GPU mode
 
-    ```
+   ```javascript
     const gpu = new GPU({ mode: mode });
     console.log(gpu.getMode());
-    
+
     var cpu = new GPU({mode:'cpu'});
     // var gpu = new GPU({mode:'gpu'});
-    
+
     function testFunc(inp) {
         return inp[this.thread.y][this.thread.x];
     }
-    
+
     const cpuKernel = cpu.createKernel(testFunc).setOutput([3, 3]);
     const gpuKernel = gpu.createKernel(testFunc).setOutput([3, 3]);
-    
+
     console.log('cpu:', cpuKernel( [[0,1,2], [3,4,5], [6,7,8]] ) );
     console.log('gpu:', gpuKernel( [[0,1,2], [3,4,5], [6,7,8]] ) );
     ```
-
-    ![QQ截图20180608105121.png](https://i.loli.net/2018/06/08/5b19efbfdc3e4.png)
 
     如果参数不全，则在cpu中出现未定义，在GPU 中出现其他值。
 
     ```javascript
     const gpu = new GPU({ mode: mode });
     console.log(gpu.getMode());
-    
+
     var cpu = new GPU({mode:'cpu'});
     // var gpu = new GPU({mode:'gpu'});
-    
+
     function testFunc(inp) {
         return inp[this.thread.y][this.thread.x];
     }
-    
+
     const cpuKernel = cpu.createKernel(testFunc).setOutput([3, 3]);
     const gpuKernel = gpu.createKernel(testFunc).setOutput([3, 3]);
-    
+
     console.log('cpu:', cpuKernel( [[0, 212], [1, 12], [2,21]] ) );
     console.log('gpu:', gpuKernel( [[0, 212], [1, 12], [2,21]] ) );
     ```
-
-    ![QQ截图20180608105323.png](https://i.loli.net/2018/06/08/5b19efc0a5d7f.png)
 
 12. SSSP 算法
 
@@ -261,10 +251,6 @@ desc: gpu.js 记录
     console.log(km([1], [1], [3]));
     ```
 
-    输出：
-
-    ![QQ截图20180608110503.png](https://i.loli.net/2018/06/08/5b19f277153f4.png)
-
     完整实例：
 
     ```javascript
@@ -272,18 +258,18 @@ desc: gpu.js 记录
     // gpu, cpu
     const gpu = new GPU({ mode: mode });
     console.log(gpu.getMode());
-    
+
     const size = 4; // keeping it small for testing
     const a = new Float32Array(size);
     const b = new Float32Array(size);
     const c = new Float32Array(size);
-    
+
     for (let i = 0; i < size; ++i) {
       a[i] = 0;
       b[i] = i;
       c[i] = 2;
     }
-    
+
     const megaKernel = gpu.createKernelMap([
       function add(a, b) {
         return a + b;
@@ -300,13 +286,4 @@ desc: gpu.js 记录
 
     输出：float32Array(4) [0, 2, 4, 6]，
 
-    完整输出：
-
-    ![QQ截图20180608111402.png](https://i.loli.net/2018/06/08/5b19f48d45e17.png)
-
     https://github.com/gpujs/gpu.js/issues/258
-
-    
-
-     
-
