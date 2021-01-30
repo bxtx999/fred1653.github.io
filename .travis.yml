@@ -24,6 +24,7 @@ install:
 
 script: # 执行脚本，清除缓存，生成静态文件
   - hexo clean
+  - sed -i "s/markdown-smart/markdown/g" ./node_modules/hexo-renderer-pandoc/index.js
   - hexo generate
 
 deploy:
