@@ -323,6 +323,8 @@ def cache(user_function, /):
 
 ### methodtools中对lru_cache的修饰
 
+methodtools 对 lru_cache进行了扩展。
+
 ```python
 
 import functools
