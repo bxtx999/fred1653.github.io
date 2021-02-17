@@ -1,8 +1,8 @@
 ---
 title: Linux系统中的 ELF 文件的理解与分析
 date: 2021-02-17 23:29:35
-tags: ["操作系统", "elf"]
-categories: "操作系统"
+tags: ["elf"]
+categories: ["OS", "Linux"]
 desc: ELF是可执行和可链接格式（Executable and Linkable Format）的缩写，定义了二进制文件、库和核心文件的结构。正式的规范允许操作系统正确解释其底层机器指令。ELF文件通常是编译器或链接器的输出，是一种二进制格式。通过合适的工具，可以对这类文件进行分析，更好地理解。
 ---
 
