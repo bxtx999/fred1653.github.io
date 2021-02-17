@@ -2,24 +2,23 @@
 title: SystemTap学习记录
 date: 2020-06-13 19:03:48
 tags: ["SystemTap"]
-categories: ["OS"]
-desc:
+categories: ["OS", "Linux"]
+desc: SystemTap 允许用户在不重新编译代码的情况下利用静态追踪、动态追踪工具，比如在任何地方动态插入printk，或者改变内核的关键数据结构（guru模式）。所有的操作都要以`root`用户模式下进行。
 ---
 
 ## SystemTap 工具
-
 
 SystemTap 允许用户在不重新编译代码的情况下利用静态追踪、动态追踪工具，比如在任何地方动态插入printk，或者改变内核的关键数据结构（guru模式）。所有的操作都要以`root`用户模式下进行。
 
 <!-- more -->
 
-**安装**
+### 安装
 
 ```bash
-$ sudo apt install systemtap systemtap-runtime
+ $ sudo apt install systemtap systemtap-runtime
 ```
 
-安装kernel debug symbol
+安装 kernel debug symbol
 
 ```bash
 # 16.04 或更高
@@ -38,9 +37,7 @@ $ sudo apt-get update
 $ sudo apt-get install linux-image-$(uname -r)-dbgsym
 ```
 
-
-
-**基础**
+### 基础
 
 + 类 Awk/C 语言
 
@@ -48,21 +45,13 @@ $ sudo apt-get install linux-image-$(uname -r)-dbgsym
 
 + [SystemTap Language Reference](https://sourceware.org/systemtap/langref/)
 
+### 指令
 
-
-**指令**
-
-
-
-
-
-**限制**
+### 限制
 
 + SystemTap 可以在内核空间进行追踪，但在用户空间追踪事件取决于内核的支持（Utrace机制）
 
 + 没有内置于内核中，所以性能比eBPF稍差。
-
-
 
 **[示例](https://sourceware.org/systemtap/examples/)**
 
@@ -90,13 +79,9 @@ $ sudo apt-get install linux-image-$(uname -r)-dbgsym
 
 + ……
 
-
-
 ### 火焰图
 
 [http://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html](http://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html)
-
-
 
 ### 参考
 
@@ -111,5 +96,3 @@ $ sudo apt-get install linux-image-$(uname -r)-dbgsym
 5. [SystemTap Example](https://sourceware.org/systemtap/examples/)
 
 6. [FlameGraph](https://github.com/brendangregg/FlameGraph)
-
-
