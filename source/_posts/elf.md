@@ -50,7 +50,7 @@ ELF是可执行和可链接格式（Executable and Linkable Format）的缩写�
 
 一个常见的误解是，ELF文件只是用于二进制文件或可执行文件。我们已经看到它们可以用于部分片段（对象代码）。另一个例子是共享库甚至核心转储（那些`core`或`a.out`文件）。ELF规范在Linux上也用于内核本身和Linux内核模块。
 
-![1](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20210217161516.png)
+![coredump](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20210217161516.png)
 
 ### 架构
 
@@ -62,7 +62,7 @@ ELF是可执行和可链接格式（Executable and Linkable Format）的缩写�
 
 通过`readelf`命令，我们可以查看一个文件的结构，它看起来是这样的。
 
-![2](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20210217161428.png)
+![Details of an ELF binary](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20210217161428.png)
 
 #### ELF header
 
@@ -117,12 +117,15 @@ $ hexdump -n 16 /bin/ps
 
 虽然有些字段已经可以通过`readelf`输出的魔力值来显示，但还有更多。例如对于文件是什么特定的处理器类型。使用`hexdump`我们可以看到完整的ELF头及其值。
 
+*通过`hexdump -C -n 64 /bin/ps`创建的输出内容*
+1
 > 7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 |.ELF............|
-> 02 00 **3e** 00 01 00 00 00 a8 2b 40 00 00 00 00 00 |..>......+@.....|
-> 40 00 00 00 00 00 00 00 30 65 01 00 00 00 00 00 |@.......0e......|
-> 00 00 00 00 40 00 38 00 09 00 40 00 1c 00 1b 00 |....@.8...@.....|
 >
-> 通过`hexdump -C -n 64 /bin/ps`创建的输出内容
+> 02 00 **3e** 00 01 00 00 00 a8 2b 40 00 00 00 00 00 |..>......+@.....|
+>
+> 40 00 00 00 00 00 00 00 30 65 01 00 00 00 00 00 |@.......0e......|
+>
+> 00 00 00 00 40 00 38 00 09 00 40 00 1c 00 1b 00 |....@.8...@.....|
 
 上面的高亮区域是定义机器类型的。值`3e`是十进制的`62`，相当于`AMD64`。要了解所有机器类型，请看一下这个ELF头文件。
 
@@ -146,9 +149,7 @@ $ hexdump -n 16 /bin/ps
 
 一个ELF文件由0个或多个段组成，描述了如何为运行时执行创建一个进程/内存映像。当内核看到这些段时，它会使用它们来映射到虚拟地址空间，使用`mmap(2)`系统调用。换句话说，它将预定义的指令转换为内存映像。如果你的ELF文件是一个正常的二进制文件，它需要这些程序头。否则，它根本无法运行。它使用这些头文件和底层数据结构，形成一个进程。这个过程与共享库类似。
 
-![3](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20210217161348.png)
-
-> An overview of program headers in an ELF binary
+![An overview of program headers in an ELF binary](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20210217161348.png)
 
 我们在这个例子中看到，有9个程序头文件。当第一次看的时候，很难理解这里发生了什么。所以我们来了解一些细节。
 
@@ -226,9 +227,14 @@ Section headers定义了文件中的所有章节。如前所述，这个 "view"�
 
 有些部分可以分组，因为它们形成一个整体，或者换句话说是一个依赖关系。新的链接器支持这个功能。不过，这种情况还是不常见，不常发现。
 
-> `# readelf -g /bin/ps``
->
-> 在该文件下没有section group。
+```bash
+# readelf -g /bin/ps
+
+
+```
+
+*在该文件下没有section group。*
+
 
 虽然这看起来可能不是很有趣，但它显示了研究现有的ELF工具包的明显好处，以供分析。为此，本文末尾列入了对工具及其主要目标的概述。
 
