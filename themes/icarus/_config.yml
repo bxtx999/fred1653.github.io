@@ -3,7 +3,7 @@ version: 3.0.0
 # Icarus theme variant, can be "default" or "cyberpunk"
 variant: default
 # Path or URL to the website's logo
-logo: /img/favicon.svg
+logo: /img/H.png
 # Page metadata configurations
 head:
     # URL or path to the website's icon
@@ -49,16 +49,16 @@ head:
     structured_data:
         # Page title (optional)
         # You should leave this blank for most of the time
-        title: 
+        title: Hoo的个人笔记
         # Page description (optional)
         # You should leave this blank for most of the time
-        description: 
+        description: Hu的个人记录。
         # Page URL (optional)
         # You should leave this blank for most of the time
-        url: 
+        url: https://www.hoooo.org
         # Page author (article:author) (optional)
         # You should leave this blank for most of the time
-        author: 
+        author: Jianan Hu
         # Page images (optional)
         # You should leave this blank for most of the time
         image: 
@@ -130,7 +130,7 @@ comment:
     # -
         # type: wechat
         # Wechat qrcode image URL
-        # qrcode: 'https://cdn.jsdelivr.net/gh/fred1653/Image-Hosting/img/20200603183856.jpg'
+        # qrcode: 'https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200603183856.jpg'
 # Share plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Share/
 share:
@@ -243,7 +243,7 @@ widgets:
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/
 plugins:
     # Enable page startup animations
-    animejs: false
+    animejs: true
     # Show the "back to top" button
     back_to_top: true
     # Baidu Analytics plugin settings
