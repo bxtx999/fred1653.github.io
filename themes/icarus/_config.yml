@@ -3,11 +3,11 @@ version: 3.0.0
 # Icarus theme variant, can be "default" or "cyberpunk"
 variant: default
 # Path or URL to the website's logo
-logo: /img/H.png
+logo: /img/H.svg
 # Page metadata configurations
 head:
     # URL or path to the website's icon
-    favicon: /img/H.png
+    favicon: /img/H.svg
     # Open Graph metadata
     # https://hexo.io/docs/helpers.html#open-graph
     open_graph:
