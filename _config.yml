@@ -93,23 +93,6 @@ markdown_it_plus:
             name: markdown-it-sub
             enable: true
 
-# pandoc:
-#   mathEngine: katex
-
-# katex:
-#   css: true
-#   throw_on_error: false
-
-# math:
-#   engine: katex
-#   katex:
-#     css: https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css
-#     js: https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js
-#     config:
-#       # KaTeX config
-#       throwOnError: false
-#       errorColor: "#cc0000"
-
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)

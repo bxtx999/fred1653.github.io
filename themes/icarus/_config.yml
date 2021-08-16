@@ -130,7 +130,7 @@ comment:
     # -
         # type: wechat
         # Wechat qrcode image URL
-        # qrcode: 'https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200603183856.jpg'
+        # qrcode: 'https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200603183856.jpg'
 # Share plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Share/
 share:
@@ -163,18 +163,18 @@ widgets:
         # Author's current location
         location: China
         # URL or path to the avatar image
-        avatar: 'https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200603184421.jpg'
+        avatar: 'https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200603184421.jpg'
         # Whether show the rounded avatar image
         avatar_rounded: true
         # Email address for the Gravatar
         gravatar: 
         # URL or path for the follow button
-        follow_link: 'https://github.com/bxtx999'
+        follow_link: 'https://github.com/jnhu76'
         # Links to be shown on the bottom of the profile widget
         social_links:
             Github:
                 icon: fab fa-github
-                url: 'https://github.com/bxtx999'
+                url: 'https://github.com/jnhu76'
             # Facebook:
             #     icon: fab fa-facebook
             #     url: 'https://facebook.com'
