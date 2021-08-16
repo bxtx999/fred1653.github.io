@@ -31,7 +31,7 @@ tags: ["社会计算", "计算思维"]
    
    + 无向图*G*的一个极大连通子图称为*G*的一个**连通分量**（或**连通分支**）。连通图只有一个连通分量，即其自身；非连通的无向图有多个连通分量。
      
-     ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/微信图片_20200301143544.png)
+     ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/微信图片_20200301143544.png)
    
    + 有向图*G*= (*V*,*E*)中，若对于V中任意两个不同的顶点 *x*和*y*，都存在从*x*到*y*以及从*y*到*x*的路径，则称*G*是**强连通图（Strongly Connected Graph）**。相应地有**强连通分量**的概念。强连通图只有一个强连通分量，即是其自身；非强连通的有向图有多个强连通分量。
 
@@ -49,7 +49,7 @@ tags: ["社会计算", "计算思维"]
 
 7. 三元闭包
    
-   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/微信截图_20200301144743.png)
+   ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/微信截图_20200301144743.png)
    
    + 不仅考虑一个时刻（“快照”）上的状态
    
@@ -117,7 +117,7 @@ tags: ["社会计算", "计算思维"]
     
     嵌入性：边的属性
     
-    ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/微信截图_20200301152118.png)
+    ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/微信截图_20200301152118.png)
     
     + 嵌入性 = 一条边两端共同的邻里数
     
@@ -129,7 +129,7 @@ tags: ["社会计算", "计算思维"]
     
     结构洞（结构位置整体）
     
-    ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/微信截图_20200301152426.png)
+    ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/微信截图_20200301152426.png)
     
     + 一个节点，移除该节点就会使网络变成多个连通分量的节点
     
@@ -147,11 +147,11 @@ tags: ["社会计算", "计算思维"]
 
 11. 强三元闭包
     
-    ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20141207102926328.png)
+    ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20141207102926328.png)
     
     桥(Bridge)：如果一个图中，已知A和B相连，若去掉连接A和B的边导致A和B分属不同的连通分量，则该边称为桥。桥为A、B间唯一路径。
     
-    ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20141207102947972.png)
+    ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20141207102947972.png)
     
     捷径(Local bridge)：若边A-B的端点A和B没有共同朋友，则称边A-B为捷径；删除A-B边将把A-B距离增加至2以上。
     

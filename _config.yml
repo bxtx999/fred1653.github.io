@@ -7,7 +7,7 @@ title: Hoooo的研究
 subtitle: '计算机科学'
 description: '记录我的科研学习'
 keywords: 'CS'
-author: Jianan Hu
+author: Hu
 language: zh-cn
 timezone: 'Asia/Shanghai'
 
@@ -52,12 +52,53 @@ highlight:
   wrap: true
   hljs: false
 
-pandoc:
-  mathEngine: katex
+# Markdown config
+markdown_it_plus:
+    highlight: true
+    html: true
+    xhtmlOut: true
+    breaks: true
+    langPrefix:
+    linkify: true
+    typographer:
+    quotes: “”‘’
+    plugins:
+        - plugin:
+            name: markdown-it-emoji
+            enable: true
+        - plugin:
+            name: markdown-it-footnote
+            enable: true
+        - plugin:
+            name: markdown-it-mark
+            enable: true
+        - plugin:
+            name: markdown-it-toc-and-anchor
+            enable: true
+        - plugin:
+            name: markdown-it-katex
+            enbale: false
+        - plugin:
+            name: markdown-it-latex2img
+            enable: false
+            options:
+              style: 'filter: opacity(90%);transform:scale(0.85);text-align:center;'
+        - plugin:
+            name: markdown-it-deflist
+            enable: true
+        - plugin:
+            name: markdown-it-sup
+            enable: true
+        - plugin:
+            name: markdown-it-sub
+            enable: true
 
-katex:
-  css: true
-  throw_on_error: false
+# pandoc:
+#   mathEngine: katex
+
+# katex:
+#   css: true
+#   throw_on_error: false
 
 # math:
 #   engine: katex
@@ -126,7 +167,7 @@ archive_generator:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: 'git'
-  repo: git@github.com:bxtx999/bxtx999.github.io.git
+  repo: git@github.com:jnhu76/jnhu76.github.io.git
   branch: master
   message:
 

@@ -58,7 +58,7 @@ head:
         url: https://www.hoooo.org
         # Page author (article:author) (optional)
         # You should leave this blank for most of the time
-        author: Jianan Hu
+        author: Hu
         # Page images (optional)
         # You should leave this blank for most of the time
         image: 
@@ -259,7 +259,7 @@ plugins:
         tracking_id: UA-65362962-1
     # Hotjar user feedback plugin
     # https://www.hotjar.com/
-    katex: false
+    katex: true
     # Enable the MathJax math typesetting support
     # https://www.mathjax.org/
     mathjax: false
@@ -280,21 +280,21 @@ providers:
 
 
 # # Math Equations Render Support
-# math:
-#   enable: true
-#   per_page: false
-#   #engine: mathjax
-#   engine: katex
+math:
+  enable: true
+  per_page: false
+  #engine: mathjax
+  engine: katex
 
-#   katex:
-#     # Use 0.7.1 as default, jsdelivr as default CDN, works everywhere even in China
-#     cdn: //cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css
-#     #cdn: //cdn.jsdelivr.net/npm/katex@0.7.1/dist/katex.min.css
-#     # CDNJS, provided by cloudflare, maybe the best CDN, but not works in China
-#     #cdn: //cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css
+  katex:
+    # Use 0.7.1 as default, jsdelivr as default CDN, works everywhere even in China
+    cdn: //cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css
+    #cdn: //cdn.jsdelivr.net/npm/katex@0.7.1/dist/katex.min.css
+    # CDNJS, provided by cloudflare, maybe the best CDN, but not works in China
+    #cdn: //cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css
 
-#     copy_tex:
-#       # See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex
-#       enable: true
-#       copy_tex_js: //cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.js
-#       copy_tex_css: //cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.css
+    copy_tex:
+      # See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex
+      enable: true
+      copy_tex_js: //cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.js
+      copy_tex_css: //cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.css

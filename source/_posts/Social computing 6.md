@@ -15,7 +15,7 @@ tags: ["社会计算", "博弈论"]
 
 2. 网络中的博弈
    
-   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200402113344.png)
+   ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200402113344.png)
    
    假设有4000辆车，都要从A走到B
    
@@ -33,7 +33,7 @@ tags: ["社会计算", "博弈论"]
    
    假设，C→D之间修一条快速路，则
    
-   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200402114853.png)
+   ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200402114853.png)
    
    若大家都走：A → C →D→B，则每个人的行驶时间为$4000/100+0+4000/100=80$
    
@@ -316,13 +316,13 @@ tags: ["社会计算", "博弈论"]
 
 1. 匹配市场问题框架
    
-   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200402130746.png)
+   ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200402130746.png)
    
    卖方，买方，估值矩阵
 
 2. 简单匹配问题
    
-   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200402130906.png)
+   ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200402130906.png)
    
    + 二部图是表达这种供需关系的工具
    
@@ -332,7 +332,7 @@ tags: ["社会计算", "博弈论"]
    
    + 这两个图体现的要求能否被满足？
      
-     ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200402131126.png)
+     ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200402131126.png)
      
      + 不能满足 =  存在受限组；S, N(S)
      
@@ -370,11 +370,11 @@ tags: ["社会计算", "博弈论"]
 
 2. 偏好卖家图（市场经济原则，涨价）
    
-   ![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200402132909.png)
+   ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200402132909.png)
 
 3. 匹配问题的解
    
-   + “计划经济”： top-down，从宏观结果到具体安排![](https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200402133228.png)
+   + “计划经济”： top-down，从宏观结果到具体安排![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200402133228.png)
    
    + 市场经济思路
      
