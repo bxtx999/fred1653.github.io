@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>pip源 - Hoooo的研究</title><meta description="Pypi 即Python Package Index，是Python官方管理第三方软件库，目前共有96202个包。Python的软件管理工具包括pip等都是用PyPI作为默认软件源和以来。 Pypi的默认镜像地址是pypi.python.org"><meta property="og:type" content="blog"><meta property="og:title" content="pip源"><meta property="og:url" content="http://www.hoooo.org/2017/01/08/pip%E6%BA%90/"><meta property="og:site_name" content="Hoooo的研究"><meta property="og:description" content="Pypi 即Python Package Index，是Python官方管理第三方软件库，目前共有96202个包。Python的软件管理工具包括pip等都是用PyPI作为默认软件源和以来。 Pypi的默认镜像地址是pypi.python.org"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.hoooo.org/img/og_image.png"><meta property="article:published_time" content="2017-01-08T09:55:20.000Z"><meta property="article:modified_time" content="2017-01-08T09:55:20.000Z"><meta property="article:author" content="Hu"><meta property="article:tag" content="pip"><meta property="article:tag" content="python"><meta property="article:tag" content="pypi"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.hoooo.org"},"headline":"Hoo的个人笔记","image":["https://www.hoooo.org/img/og_image.png"],"datePublished":"2017-01-08T09:55:20.000Z","dateModified":"2017-01-08T09:55:20.000Z","author":{"@type":"Person","name":"Hu"},"description":"Hu的个人记录。"}</script><link rel="canonical" href="http://www.hoooo.org/2017/01/08/pip%E6%BA%90/"><link rel="alternative" href="/atom.xml" title="Hoooo的研究" type="application/atom+xml"><link rel="icon" href="/img/2.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?5fd96c2a5c9055cdab1b643ff129db84";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-65362962-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-65362962-1');</script><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Suche" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><time class="level-item" dateTime="2017-01-08T09:55:20.000Z" title="2017-01-08T09:55:20.000Z">2017-01-08</time><span class="level-item"><a class="link-muted" href="/categories/Python/">Python</a></span><span class="level-item">2 分钟 lesen (Über 359 Worte)</span></div></div><h1 class="title is-3 is-size-4-mobile">pip源</h1><div class="content"><p><code>Pypi</code> 即<a href="https://pypi.python.org/pypi">Python Package Index</a>，是Python官方管理第三方软件库，目前共有96202个包。Python的软件管理工具包括pip等都是用PyPI作为默认软件源和以来。</p>
+<p>Pypi的默认镜像地址是<code>pypi.python.org</code></p>
+<a id="more"></a>
+<h3 id="镜像地址">镜像地址</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Mirror</th>
+<th>Location</th>
+<th># of packages</th>
+<th>last update</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://pypi.python.org/">pypi.python.org</a></td>
+<td>San Francisco, California US</td>
+<td>96201</td>
+<td>2017-01-08 09:48:24</td>
+</tr>
+<tr class="even">
+<td><a href="https://pypi.douban.com/">pypi.douban.com</a></td>
+<td>Beijing, Beijing CN</td>
+<td>97126</td>
+<td>2017-01-08 07:00:14</td>
+</tr>
+<tr class="odd">
+<td><a href="https://pypi.fcio.net/">pypi.fcio.net</a></td>
+<td>Oberhausen, Nordrhein-Westfalen DE</td>
+<td>97735</td>
+<td>2017-01-08 09:45:01</td>
+</tr>
+<tr class="even">
+<td><a href="https://pypi.tuna.tsinghua.edu.cn/">pypi.tuna.tsinghua.edu.cn</a></td>
+<td>Beijing, Beijing CN</td>
+<td></td>
+<td>Unavailable</td>
+</tr>
+<tr class="odd">
+<td><a href="https://mirror.picosecond.org/pypi">mirror.picosecond.org/pypi</a></td>
+<td>Fremont, California US</td>
+<td></td>
+<td>Unavailable</td>
+</tr>
+<tr class="even">
+<td><a href="https://mirrors.aliyun.com/pypi">mirrors.aliyun.com/pypi</a></td>
+<td>Hangzhou, Zhejiang CN</td>
+<td>97513</td>
+<td>2017-01-07 19:01:37</td>
+</tr>
+<tr class="odd">
+<td><a href="https://pypi.pubyun.com/">pypi.pubyun.com</a></td>
+<td>Changzhou, Jiangsu CN</td>
+<td>95514</td>
+<td>2017-01-08 09:30:03</td>
+</tr>
+<tr class="even">
+<td><a href="https://mirrors-uk.go-parts.com/python">mirrors-uk.go-parts.com/python</a></td>
+<td>Reston, Virginia US</td>
+<td></td>
+<td>Unavailable</td>
+</tr>
+<tr class="odd">
+<td><a href="https://mirrors-ru.go-parts.com/python">mirrors-ru.go-parts.com/python</a></td>
+<td>Reston, Virginia US</td>
+<td></td>
+<td>Unavailable</td>
+</tr>
+<tr class="even">
+<td><a href="https://mirrors-au.go-parts.com/python">mirrors-au.go-parts.com/python</a></td>
+<td>Reston, Virginia US</td>
+<td></td>
+<td>Unavailable</td>
+</tr>
+<tr class="odd">
+<td><a href="https://pypi.mirrors.ustc.edu.cn/">pypi.mirrors.ustc.edu.cn</a></td>
+<td>Hefei, Anhui CN</td>
+<td>76240</td>
+<td>2017-01-08 04:48:06</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>2017-01-08 18:09:34 更新</p>
+<p>数据来源：https://www.pypi-mirrors.org/</p>
+</blockquote>
+<h3 id="使用方法">使用方法</h3>
+<ol type="1">
+<li><p>简单使用</p>
+<p><code>pip install -i https://&lt;mirror&gt;/simple &lt;package&gt;</code> or <code>pip install -i http://&lt;mirror&gt;/simple &lt;package&gt;</code></p></li>
+<li><p>全局设置</p>
+<ul>
+<li><p>Linux</p>
+<p>添加<code>~/.pip/pip.conf</code>文件，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url &#x3D; https:&#x2F;&#x2F;&lt;mirror&gt;&#x2F;simple</span><br><span class="line"></span><br><span class="line">[install]</span><br><span class="line">trusted-host&#x3D;&lt;mirror&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>Windows</p>
+<p>在<code>C:\Users\&lt;YourPCName&gt;</code>下建立<code>.pip</code>文件夹，并添加<code>pip.conf</code>文件。</p>
+<p>文件内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url &#x3D; https:&#x2F;&#x2F;&lt;mirror&gt;&#x2F;simple</span><br><span class="line"></span><br><span class="line">[install]</span><br><span class="line">trusted-host&#x3D;&lt;mirror&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>http https任选</p>
+</blockquote></li>
+</ul></li>
+<li><p><code>easy_install</code>和<code>pip</code>使用方法类似。</p></li>
+</ol>
+<h3 id="参考">参考</h3>
+<ol type="1">
+<li>https://www.pypi-mirrors.org/</li>
+<li>http://mirrors.aliyun.com/help/pypi</li>
+<li>https://en.wikipedia.org/wiki/Python_Package_Index</li>
+<li>https://pypi.python.org/pypi</li>
+</ol>
+</div><div class="article-tags size-small mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/pip/">pip</a><a class="link-muted mr-2" rel="tag" href="/tags/python/">python</a><a class="link-muted mr-2" rel="tag" href="/tags/pypi/">pypi</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5ed77c944764050012743e2b&amp;product=inline-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2017/12/21/Graph_1/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Image processing using Graph_1</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2016/11/16/Pin%E5%AD%A6%E4%B9%A01/"><span class="level-item">Pin学习1</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Kommentare</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://www.hoooo.org/2017/01/08/pip%E6%BA%90/';
+            this.page.identifier = '2017/01/08/pip源/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'hoo' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://cdn.jsdelivr.net/gh/bxtx999/Image-Hosting/img/20200603184421.jpg" alt="Hoooo"></figure><p class="title is-size-4 is-block line-height-inherit">Hoooo</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">31</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Kategorien</p><a href="/categories"><p class="title">13</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">36</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/bxtx999" target="_blank" rel="noopener">Folgen</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/bxtx999"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Kategorien</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul class="mr-0"><li><a class="level is-mobile is-marginless" href="/categories/Javascript/WebGPU/"><span class="level-start"><span class="level-item">WebGPU</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile is-marginless" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">7</span></span></a><ul class="mr-0"><li><a class="level is-mobile is-marginless" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/OS/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%80%A7%E8%83%BD/"><span class="level-start"><span class="level-item">计算机性能</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile is-marginless" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul class="mr-0"><li><a class="level is-mobile is-marginless" href="/categories/Python/functools/"><span class="level-start"><span class="level-item">functools</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%9B%BE%E8%B1%A1%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">图象处理</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E7%94%9F%E6%B4%BB/"><span class="level-start"><span class="level-item">生活</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="level-start"><span class="level-item">社会计算</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">编程</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="level-start"><span class="level-item">运筹学</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Archive</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2021/02/"><span class="level-start"><span class="level-item">二月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/10/"><span class="level-start"><span class="level-item">十月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2018/07/"><span class="level-start"><span class="level-item">七月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2018/04/"><span class="level-start"><span class="level-item">四月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2017/12/"><span class="level-start"><span class="level-item">十二月 2017</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2017/01/"><span class="level-start"><span class="level-item">一月 2017</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2016/11/"><span class="level-start"><span class="level-item">十一月 2016</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2016/04/"><span class="level-start"><span class="level-item">四月 2016</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/DSL/"><span class="tag">DSL</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GPU/"><span class="tag">GPU</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Huge-Page/"><span class="tag">Huge Page</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pin/"><span class="tag">Pin</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python/"><span class="tag">Python</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SystemTap/"><span class="tag">SystemTap</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/algorithms/"><span class="tag">algorithms</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/concurrency/"><span class="tag">concurrency</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/data-structure/"><span class="tag">data structure</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elf/"><span class="tag">elf</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/functools/"><span class="tag">functools</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/image-processing/"><span class="tag">image processing</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lru/"><span class="tag">lru</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pip/"><span class="tag">pip</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pypi/"><span class="tag">pypi</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/software/"><span class="tag">software</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/tricks/"><span class="tag">tricks</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%B3%E7%AD%96%E8%AE%BA/"><span class="tag">决策论</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/"><span class="tag">博弈论</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE/"><span class="tag">图</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"><span class="tag">图像处理</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"><span class="tag">多线程</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E4%B8%96%E7%95%8C%E9%97%AE%E9%A2%98/"><span class="tag">小世界问题</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%B6%E5%8F%91/"><span class="tag">并发</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%89%E5%90%91%E5%9B%BE/"><span class="tag">有向图</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B5%81%E8%A1%8C%E6%AD%8C%E6%9B%B2/"><span class="tag">流行歌曲</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%BC%94%E5%94%B1/"><span class="tag">演唱</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="tag">社会计算</span><span class="tag is-grey-lightest">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">算法与数据结构</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/"><span class="tag">编程范式</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E9%A1%B5%E6%8E%92%E5%BA%8F/"><span class="tag">网页排序</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%80%9D%E7%BB%B4/"><span class="tag">计算思维</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="tag">运筹学</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe to Updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=15ovpvd8su4sb5j9um1lhtb2j4&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="15ovpvd8su4sb5j9um1lhtb2j4" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="Subscribe"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a><p class="size-small"><span>&copy; 2021 Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'http://www.hoooo.org',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Zurück nach oben" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Tippen Sie etwas..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Tippen Sie etwas...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Kategorien","tags":"Tags"});
+        });</script></body></html>
