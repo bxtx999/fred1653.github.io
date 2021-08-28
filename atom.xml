@@ -6,7 +6,7 @@
   <link href="http://www.hoooo.org/atom.xml" rel="self"/>
   
   <link href="http://www.hoooo.org/"/>
-  <updated>2021-08-25T15:46:41.000Z</updated>
+  <updated>2021-08-28T17:35:00.000Z</updated>
   <id>http://www.hoooo.org/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>堆与栈</title>
+    <link href="http://www.hoooo.org/2021/08/29/%E5%A0%86%E4%B8%8E%E6%A0%88/"/>
+    <id>http://www.hoooo.org/2021/08/29/%E5%A0%86%E4%B8%8E%E6%A0%88/</id>
+    <published>2021-08-28T17:35:00.000Z</published>
+    <updated>2021-08-28T17:35:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="进程内存布局"><a class="markdownIt-Anchor" href="#进程内存布局"></a> 进程内存布局</h2><p>对于每个程序所分配的内存由很多部分组成，通常称之为“段”（segment）。</p><ul><li><p><strong>文本段</strong>（text）包括进程运行的程序机器语言指令。文本段具有只读属性，以防止进程通过错误指针意外修改自身指令。</p></li><li><p><strong>初始化数据段</strong>（BSS）包括为未进行显式初始化的全局变量和静态变量。</p><p>对于初始化和未初始化数据段即用户初始化数据段（user-initialized data segment）和零初始化数据段（zero-initialized data segment）。</p></li><li><p>栈（stack）是一个动态增长和收缩的段，由栈帧（stack frames）组成。系统会为每个当前调用的函数分配一个栈帧。栈帧中存储了函数的局部变量（所谓自动变量）、实参和返回值。</p></li><li><p>堆（heap）是可在运行时（变量）动态进行内存分配的一块区域。堆顶端成为program break。</p></li></ul><h2 id="栈"><a class="markdownIt-Anchor" href="#栈"></a> 栈</h2><p>栈是程序运行的基础。当每一个函数被调用时，操作系统会在栈顶分配一块连续的内存。这块内存被称为帧（frame）。</p><blockquote><p>这里讨论的栈是用户栈（user stack），和内核栈区分开来。内核栈是每个进程保留在内核内存中的内存区域，在执行系统调用的过程中供（内核）内部函数调用使用。</p></blockquote><p>栈是自顶向下增长的，一个程序的调用栈最底部，除去入口帧（entry frame），就是<code>main()</code>函数对应的帧。随着<code>mian()</code>函数一层一层调用，栈会一层一层地扩展；调用结束后，栈会一层一层地回溯，把内存释放回去。</p><p>每个栈帧包括如下信息：</p><ul><li><p>函数实参和局部变量：这些变量都是在函数调用时自动创建的，被称为C语言中的自动变量。函数返回时将自动销毁这些变量（因为栈帧会被释放），这也是自动变量与静态变量（以及全局）变量主要的语义区别：后者与函数执行无关，且长期存在。</p></li><li><p>（函数）调用的链接信息：每个函数都会用到一些CPU寄存器，比如程序计数器，其值向下一条要执行的机器语言指令。当每个函数调用另外一个函数时，会在被调用函数的栈帧中保存这些寄存器的副本，以便函数返回时能够为函数调用者将寄存器恢复原状。</p></li></ul><p>在调用的过程中，一个新的帧会分配足够的空间存储寄存器的上下文。在函数里使用到的通用寄存器会在栈保存一个副本，当这个函数调用结束，通过副本，可以恢复出原本的寄存器的上下文，就像什么都没有经历一样。此外，函数所需要使用到的局部变量，也都会在帧分配的时候被预留出来。</p><p>那么，一个函数运行时，是怎么确定需要多大的帧？</p><p>这要归功于编译器。在编译、优化代码时，一个函数就是一个最小的编译单元。</p><p>在这个函数里，编译器得指导有哪些寄存器、栈上要放哪些局部变量，而这些都要在编译时确定。所以编译器就需要为每个局部变量明确大小，以便于预留空间。</p><blockquote><p><strong>在编译时，一切无法确定大小或者大小可以改变的数据，都无法安全地放在栈上，最好放在堆上。</strong></p></blockquote><h3 id="存放在栈上的问题"><a class="markdownIt-Anchor" href="#存放在栈上的问题"></a> 存放在栈上的问题</h3><p>栈上的内存分配是非常高效的。只需要改动栈指针（stack pointer），就可以预留相应的空间；把栈指针改动回来，预留的空间又会被释放掉。预留和释放只是动动寄存器，不涉及额外计算、不涉及系统调用，因而效率很高。</p><p>所以理论上说，只要可能，我们应该把变量分配到栈上，这样可以达到更好的运行速度。</p><p>那为什么在实际工作中，我们又要避免把大量的数据分配在栈上呢？</p><p>**这主要是考虑到调用栈的大小，避免栈溢出（stack overflow）。**一旦当前程序的调用栈超出了系统允许的最大栈空间，无法创建新的帧，来运行下一个要执行的函数，就会发生栈溢出，这时程序会被系统终止，产生崩溃信息。过大的栈内存分配是导致栈溢出的原因之一，更广为人知的原因是递归函数没有妥善终止。一个递归函数会不断调用自己，每次调用都会形成一个新的帧，如果递归函数无法终止，最终就会导致栈溢出。</p><h2 id="堆"><a class="markdownIt-Anchor" href="#堆"></a> 堆</h2><p>当我们需要动态大小的内存时，只能使用堆，比如可变长度的数组、列表、哈希表、字典，它们都分配在堆上。</p><p>除了动态大小的内存需要被分配到堆上外，动态生命周期的内存也需要分配到堆上。</p><p>上文中我们讲到，栈上的内存在函数调用结束之后，所使用的帧被回收，相关变量对应的内存也都被回收待用。所以栈上内存的生命周期是不受开发者控制的，并且局限在当前调用栈。</p><p>而堆上分配出来的每一块内存需要显式地释放，这就使堆上内存有更加灵活的生命周期，可以在不同的调用栈之间共享数据。</p><h3 id="存放在堆上的问题"><a class="markdownIt-Anchor" href="#存放在堆上的问题"></a> 存放在堆上的问题</h3><p>堆内存的这种灵活性也给内存管理带来很多挑战。</p><p>如果手工管理堆内存的话，堆上内存分配后忘记释放，就会造成内存泄漏。一旦有内存泄漏，程序运行得越久，就越吃内存，最终会因为占满内存而被操作系统终止运行。</p><p>如果堆上内存被多个线程的调用栈引用，该内存的改动要特别小心，需要加锁以独占访问，来避免潜在的问题。比如说，一个线程在遍历列表，而另一个线程在释放列表中的某一项，就可能访问野指针，导致<strong>堆越界（heap out of bounds）</strong>。而堆越界是第一大内存安全问题。</p><p>如果堆上内存被释放，但栈上指向堆上内存的相应指针没有被清空，就有可能发生**使用已释放内存（use after free）**的情况，程序轻则崩溃，重则隐含安全隐患。根据<a href="https://github.com/Microsoft/MSRC-Security-Research/blob/master/presentations/2019_02_BlueHatIL/2019_01%20-%20BlueHatIL%20-%20Trends%2C%20challenge%2C%20and%20shifts%20in%20software%20vulnerability%20mitigation.pdf">微软安全反应中心（MSRC）的研究</a>，这是第二大内存安全问题。</p><h2 id="gc-arc"><a class="markdownIt-Anchor" href="#gc-arc"></a> GC、ARC</h2><p>为了避免堆内存手动管理造成问题，Java等语言选择追踪式垃圾回收管理堆内存。Swift等语言选择自动引用计数。</p><ul><li><p>追踪式垃圾回收</p><p>这种方式通过定期标记（mark）找出不再被引用的对象，然后将其清理（sweep）掉，来自动管理内存，减轻开发者的负担。</p></li><li><p>自动引用计数</p><p>在编译时，它为每个函数插入 retain/release 语句来自动维护堆上对象的引用计数，当引用计数为零的时候，release 语句就释放对象。</p></li></ul><p>比较：</p><ul><li><p>从效率上来说，GC 在内存分配和释放上无需额外操作，而 ARC 添加了大量的额外代码处理引用计数，所以 GC 效率更高，吞吐量（throughput）更大。</p></li><li><p>但是，GC 释放内存的时机是不确定的，释放时引发的 STW（Stop The World），也会导致代码执行的延迟（latency）不确定。所以一般携带 GC 的编程语言，不适于做嵌入式系统或者实时系统。当然，Erlang VM是个例外， 它把 GC 的粒度下放到每个 process，最大程度解决了 STW 的问题。</p></li></ul><h2 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h2><p>对于存入栈上的值，它的大小在编译期就需要确定。栈上存储的变量生命周期在当前调用栈的作用域内，无法跨调用栈引用。堆可以存入大小未知或者动态伸缩的数据类型。</p><p>堆上存储的变量，其生命周期从分配后开始，一直到释放时才结束，因此堆上的变量允许在多个调用栈之间引用。但也导致堆变量的管理非常复杂，手工管理会引发很多内存安全性问题，而自动管理，无论是 GC 还是 ARC，都有性能损耗和其它问题。</p><p>栈上存放的数据是静态的，静态大小，静态生命周期；堆上存放的数据是动态的，动态大小，动态生命周期。</p><h2 id="来源"><a class="markdownIt-Anchor" href="#来源"></a> 来源</h2><ol><li><p><a href="https://time.geekbang.org/column/article/408409">内存：值放堆上还是放栈上，这是一个问题</a></p></li><li><p>Unix系统编程手册</p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;进程内存布局&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#进程内存布局&quot;&gt;&lt;/a&gt; 进程内存布局&lt;/h2&gt;
+&lt;p&gt;对于每个程序所分配的内存由很多部分组成，通常称之为“段”（segment）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;str</summary>
+      
+    
+    
+    
+    <category term="OS" scheme="http://www.hoooo.org/categories/OS/"/>
+    
+    
+    <category term="OS" scheme="http://www.hoooo.org/tags/OS/"/>
+    
+    <category term="内存" scheme="http://www.hoooo.org/tags/%E5%86%85%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>分治策略-幂乘问题.md</title>
@@ -578,35 +608,6 @@
     <category term="决策论" scheme="http://www.hoooo.org/tags/%E5%86%B3%E7%AD%96%E8%AE%BA/"/>
     
     <category term="运筹学" scheme="http://www.hoooo.org/tags/%E8%BF%90%E7%AD%B9%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>算法数学基础 - 2</title>
-    <link href="http://www.hoooo.org/2020/05/13/%E7%AE%97%E6%B3%95%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80-2/"/>
-    <id>http://www.hoooo.org/2020/05/13/%E7%AE%97%E6%B3%95%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80-2/</id>
-    <published>2020-05-13T09:49:10.000Z</published>
-    <updated>2020-05-13T09:49:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="算法数学基础---2">算法数学基础 - 2</h2><hr /><ol type="1"><li>函数渐近界的定理</li></ol><a id="more"></a><ul><li><p><strong>定理1</strong></p><blockquote><p>设<span class="math inline">\(f\)</span>和 <span class="math inline">\(g\)</span>是定义域为自然数集合的函数：</p><p>（1）如果<span class="math inline">\(\lim\limits_{n\rightarrow\infty}f(n)/g(n)\)</span>存在，并且等于某个常数<span class="math inline">\(c&gt;0\)</span>，那么<span class="math inline">\(f(n)=\Theta(g(n))\)</span>。</p><p>（2）如果<span class="math inline">\(\lim\limits_{n\rightarrow\infty}f(n)/g(n)=0\)</span>，那么<span class="math inline">\(f(n)=o(g(n))\)</span>。</p><p>（3）如果<span class="math inline">\(\lim\limits_{n\rightarrow\infty}f(n)/g(n)=+\infty\)</span>，那么<span class="math inline">\(f(n)=\omega(g(n))\)</span>。</p></blockquote><p>推理1 → <strong>多项式函数的阶</strong>低于<strong>指数函数的阶</strong>，<span class="math inline">\(n^d=o(r^n),r&gt;1,d&gt;0\)</span>。</p><p>推理2 →<strong>对数函数的阶</strong>低于<strong>幂函数的阶</strong>，<span class="math inline">\(\ln n=o(n^d),d&gt;0\)</span>。</p></li><li><p><strong>定理2</strong></p><blockquote><p>设函数<span class="math inline">\(f\)</span>，<span class="math inline">\(g\)</span>，<span class="math inline">\(h\)</span>的定义域为自然数集合，</p><p>（1）如果<span class="math inline">\(f=O(g)\)</span>且<span class="math inline">\(g=O(h)\)</span>，那么<span class="math inline">\(f=O(h)\)</span>；</p><p>（2）如果<span class="math inline">\(f=\Omega(g)\)</span>且<span class="math inline">\(g=\Omega(h)\)</span> ，那么<span class="math inline">\(f=\Omega(h)\)</span>；</p><p>（3）如果<span class="math inline">\(f=\Theta(g)\)</span>且<span class="math inline">\(g=\Theta(h)\)</span>，那么<span class="math inline">\(f=\Theta(h)\)</span>。</p><p>函数的阶之间的关系具有传递性。</p></blockquote></li><li><p><strong>定理3</strong></p><blockquote><p>假设函数<span class="math inline">\(f\)</span>和<span class="math inline">\(g\)</span>的定义域为自然数集，若对某个其他函数<span class="math inline">\(h\)</span>，有<span class="math inline">\(f=O(h)\)</span>和<span class="math inline">\(g=O(h)\)</span>，那么<span class="math inline">\(f+g=O(h)\)</span>。</p></blockquote><p>该定理可以推广到有限个函数。即算法由有限步骤构成，若每一步的时间复杂度函数的上界都是<span class="math inline">\(h(n)\)</span>，那么该算法的时间复杂度函数可以写作<span class="math inline">\(O(h(n))\)</span>。在常数步的情况下取最高阶函数即可。</p></li></ul><ol start="2" type="1"><li><p>几种重要函数的性质</p><ul><li><p>基本函数类</p><ul><li><p>至少指数级：<span class="math inline">\(2^n,3^n,n!~,\dots\)</span></p></li><li><p>多项式级：<span class="math inline">\(n,n^2,n\log n,n^{\frac{1}{2}},\dots\)</span></p></li><li><p>对数多项式级：<span class="math inline">\(\log n, \log^2n,\log\log n,\dots\)</span></p></li></ul></li><li><p>对数函数</p><ul><li><p>符号：</p><p><span class="math inline">\(\log n = \log_2n\)</span></p><p><span class="math inline">\(\log^kn=(\log n)^k\)</span></p><p><span class="math inline">\(\log \log n=\log(\log n)\)</span></p></li><li><p>性质：</p><p>（1）<span class="math inline">\(\log_2n=\Theta(\log_ln)\)</span></p><p>（2）<span class="math inline">\(\log_bn=o(n^\alpha), (\alpha&gt;0)\)</span></p><p>（3）<span class="math inline">\(a^{\log_bn}=n^{\log_ba}\)</span></p></li></ul></li><li><p>指数函数与阶乘</p><p>Stirling公式 <span class="math inline">\(n!=\sqrt{2\pi n}(\frac{n}{e})^n(1+\Theta(\frac{1}{n}))\)</span></p><p><span class="math inline">\(n!=o(n^n)\)</span></p><p><span class="math inline">\(n!=\omega(2^n)\)</span></p><p><span class="math inline">\(\log(n!)=\Theta(n\log n)\)</span></p></li><li><p>取整函数</p><ul><li><p>定义：</p><p><span class="math inline">\(\lfloor x\rfloor\)</span>：表示小于等于<span class="math inline">\(x\)</span>的最大整数</p><p><span class="math inline">\(\lceil x\rceil\)</span>：表示大于等于<span class="math inline">\(x\)</span>的最小整数</p></li><li><p>举例：</p><p><span class="math inline">\(\lfloor 2.6\rfloor=2, \lceil 2.6\rceil=3,\lfloor 2\rfloor=\lceil 2\rceil=2\)</span></p></li><li><p>应用：二分搜索</p><p>输入数组长度<span class="math inline">\(n\)</span>，中位数位置：<span class="math inline">\(\lfloor n/2\rfloor\)</span>，与中位数比较后子问题大小：<span class="math inline">\(\lfloor n/2\rfloor\)</span></p></li><li><p>性质</p><p>（1）<span class="math inline">\(x-1&lt;\lfloor x\rfloor \le x \le \lceil x\rceil &lt; x+1\)</span></p><p>（2）<span class="math inline">\(\lfloor x+n \rfloor=\lfloor x\rfloor+n,\lceil x+n\rceil=\lceil x\rceil+n, n为整数\)</span></p><p>（3）<span class="math inline">\(\lceil \frac{n}{2}\rceil+\lfloor \frac{n}{2}\rfloor=n\)</span></p><p>（4）<span class="math inline">\(\lceil \frac{\lceil\frac{n}{a} \rceil}{b}\rceil=\lceil\frac{n}{ab} \rceil, \lfloor \frac{\lfloor \frac{n}{a}\rfloor}{b}\rfloor =\lfloor \frac{n}{ab}\rfloor\)</span></p></li></ul></li><li><p>按照阶排序</p><p><span class="math display">\[2^{2^n},\quad n!,\quad n2^n,\quad (3/2)^n,\quad (\log n)^{\log n} =n^{\log\log n}, \\n^3,\quad \log(n!)=\Theta(n\log n),\quad n=2^{\log n}, \\\log^2n,\quad \log n,\quad \sqrt{\log n}, \quad \log\log n, \\n^{1/\log n}=1\]</span></p></li></ul></li></ol><h3 id="来源">来源</h3><hr /><ol type="1"><li>北京大学-算法设计与分析</li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;算法数学基础---2&quot;&gt;算法数学基础 - 2&lt;/h2&gt;
-&lt;hr /&gt;
-&lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;函数渐近界的定理&lt;/li&gt;
-&lt;/ol&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="http://www.hoooo.org/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="算法与数据结构" scheme="http://www.hoooo.org/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    <category term="algorithms" scheme="http://www.hoooo.org/tags/algorithms/"/>
-    
-    <category term="data structure" scheme="http://www.hoooo.org/tags/data-structure/"/>
     
   </entry>
   
