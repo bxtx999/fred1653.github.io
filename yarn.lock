@@ -2936,11 +2936,6 @@ markdown-it-katex@^2.0.3:
   dependencies:
     katex "^0.6.0"
 
-markdown-it-latex2img@^0.0.6:
-  version "0.0.6"
-  resolved "http://mirrors.cloud.tencent.com/npm/markdown-it-latex2img/-/markdown-it-latex2img-0.0.6.tgz#a8967133b5523f0f23490d774072faa055faf9ee"
-  integrity sha512-plzX+YmYv28UnM172ZDKexyquec/GMit2K84g4x60u0YRFybhDQl8W0aTCHD8gJbhYVJRTWIDaL9YB0cvTijYQ==
-
 markdown-it-mark@^2.0.0:
   version "2.0.0"
   resolved "http://mirrors.cloud.tencent.com/npm/markdown-it-mark/-/markdown-it-mark-2.0.0.tgz#46a1aa947105aed8188978e0a016179e404f42c7"
