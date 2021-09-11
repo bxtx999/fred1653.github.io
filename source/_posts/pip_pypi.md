@@ -4,6 +4,7 @@ date: "2017-01-08 17:55:20"
 categories: "Python"
 tags: ["python", "pip", "pypi"]
 desc:
+toc: true
 ---
 
 `Pypi` 即[Python Package Index](https://pypi.python.org/pypi)，是Python官方管理第三方软件库，目前共有96202个包。Python的软件管理工具包括pip等都是用PyPI作为默认软件源和以来。

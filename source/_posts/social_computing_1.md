@@ -3,6 +3,7 @@ title: Social computing 1 —— 网络与市场中的计算思维
 date: "2020-03-02 19:42:00"
 categories: "社会计算"
 tags: ["社会计算", "计算思维"]
+toc: true
 ---
 
 ## 1. 网络与图论

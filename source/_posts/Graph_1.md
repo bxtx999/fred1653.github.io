@@ -4,6 +4,7 @@ date: "2017-12-21 09:34:37"
 categories: "图象处理"
 tags: ['image processing', '图像处理']
 desc: 图像处理第一节笔记
+toc: true
 ---
 
 ### Lecture1

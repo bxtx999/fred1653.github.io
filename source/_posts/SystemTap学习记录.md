@@ -4,6 +4,7 @@ date: 2020-06-13 19:03:48
 tags: ["SystemTap"]
 categories: ["OS", "Linux"]
 desc: SystemTap 允许用户在不重新编译代码的情况下利用静态追踪、动态追踪工具，比如在任何地方动态插入printk，或者改变内核的关键数据结构（guru模式）。所有的操作都要以`root`用户模式下进行。
+toc: true
 ---
 
 ## SystemTap 工具

@@ -4,6 +4,7 @@ date: "2018-07-17 23:55:28"
 categories: "编程"
 tags: ["DSL"]
 desc: DSL，即Domain Specific Language，是为在某些特定领域内解决特定问题而设计的专用语言，其基本思想是“求专不求全”。
+toc: true
 ---
 
 

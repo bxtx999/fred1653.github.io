@@ -4,12 +4,13 @@ date: 2020-08-11 21:55:14
 tags: "Huge Page"
 categories: ["OS", "Linux"]
 desc: Linux系统中使用 Huge Page。
+toc: true
 ---
 
 ### Ⅰ. Check Huge Page
 
 1. Linux 内核支持多种 page size。
-   
+
    | 架构    | HugePage Size                                                                                |
    | ----- | -------------------------------------------------------------------------------------------- |
    | arm64 | 4K, 2M and 1G (or 64K and 512M if one builds their own kernel with CONFIG_ARM64_64K_PAGES=y) |

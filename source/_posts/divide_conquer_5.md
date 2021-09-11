@@ -4,6 +4,7 @@ updated: 2021-08-25 23:36:41
 categories: "算法"
 tags: ["算法与数据结构", "algorithms", "data structure", "分治策略"]
 desc: 改进分治算法的途径：减少子问题数字；增加预处理。
+toc: true
 ---
 
 ## 减少子问题数

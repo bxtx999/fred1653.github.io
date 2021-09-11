@@ -4,6 +4,7 @@ date: "2018-06-08 11:17:54"
 tags: ["javascript", "GPU"]
 categories: ["Javascript", "WebGPU"]
 desc: gpu.js 记录
+toc: true
 ---
 
 ## gpu.js 使用记录

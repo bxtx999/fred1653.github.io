@@ -4,6 +4,7 @@ date: 2021-08-16 14:44:45
 tags: ["并发", "concurrency"]
 categories: ["OS", "Linux"]
 desc: 并发
+toc: true
 ---
 
 计算机领域的并发指的是在单个系统里同时执行多个独立的任务，而非顺序的进行一些活动。

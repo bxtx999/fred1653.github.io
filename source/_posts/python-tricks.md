@@ -4,6 +4,7 @@ date: 2021-01-30 15:32:26
 tags: ["tricks"]
 categories: ["Python"]
 desc: Python 编程记录
+toc: true
 ---
 
 ## 1. Python set操作

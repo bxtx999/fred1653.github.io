@@ -4,6 +4,7 @@ date: 2021-08-29 01:35:00
 tags: ["OS", "内存"]
 categories: "OS"
 desc: 学习、理解堆和栈的设计原理。
+toc: true
 ---
 
 ## 进程内存布局

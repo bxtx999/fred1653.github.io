@@ -3,6 +3,7 @@ title: Trie字典树
 date: "2016-04-25 23:28:56"
 categories: "算法"
 tags: ["算法"]
+toc: true
 ---
 
 ## 一、字典树

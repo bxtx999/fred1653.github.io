@@ -3,32 +3,30 @@ title: 算法数学基础 - 2
 categories: "算法"
 date: "2020-05-13 17:49:10"
 tags: ["算法与数据结构", "algorithms", "data structure"]
+toc: true
 ---
 
-## 算法数学基础 - 2
-
------
 
 1. 函数渐近界的定理
 
-<!-- more -->
-
    + **定理1**
-     
+
      > 设$f$和 $g$是定义域为自然数集合的函数：
      > 
      > （1）如果$\lim\limits_{n\rightarrow\infty}f(n)/g(n)$存在，并且等于某个常数$c>0$，那么$f(n)=\Theta(g(n))$。
      > 
      > （2）如果$\lim\limits_{n\rightarrow\infty}f(n)/g(n)=0$，那么$f(n)=o(g(n))$。
-     > 
+     >
      > （3）如果$\lim\limits_{n\rightarrow\infty}f(n)/g(n)=+\infty$，那么$f(n)=\omega(g(n))$。
-     
+
      推理1 → **多项式函数的阶**低于**指数函数的阶**，$n^d=o(r^n),r>1,d>0$。
-     
+
      推理2 →**对数函数的阶**低于**幂函数的阶**，$\ln n=o(n^d),d>0$。
-   
+
+   <!-- more -->
+
    + **定理2**
-     
+
      > 设函数$f$，$g$，$h$的定义域为自然数集合，
      > 
      > （1）如果$f=O(g)$且$g=O(h)$，那么$f=O(h)$；
@@ -119,8 +117,8 @@ tags: ["算法与数据结构", "algorithms", "data structure"]
      $$
 
 
-### 来源
-
 -----
+
+来源：
 
 1. 北京大学-算法设计与分析

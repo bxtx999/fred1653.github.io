@@ -3,9 +3,10 @@ title: 字典树Trie2
 date: "2016-04-26 23:20:49"
 categories: "算法"
 tags: ["算法", "Python"]
+toc: true
 ---
 
-接着上一篇[字典树结构](http://hoooo.org/2016/04/25/Trie%E5%AD%97%E5%85%B8%E6%A0%91/)的讲解，我们接着使用`C++`和`Python`来实现字典树。
+接着上一篇[字典树结构](http://hoooo.org/2016/04/25/Trie_1/)的讲解，我们接着使用`C++`和`Python`来实现字典树。
 
 ## 一、LeetCode的字典树
 

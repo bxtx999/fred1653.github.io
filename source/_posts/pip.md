@@ -4,6 +4,7 @@ date: "2018-04-24 16:09:02"
 categories: "Python"
 tags: ["pip"]
 desc: 在pip中使用build_ext标识指定编译的目录
+toc: true
 ---
 
 ## 开发中遇到的问题

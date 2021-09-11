@@ -3,6 +3,7 @@ title: 算法数学基础 - 1
 date: "2020-05-13 00:37:16"
 categories: "算法"
 tags: ["算法与数据结构", "algorithms", "data structure"]
+toc: true
 ---
 
 ## 算法研究的主要内容
@@ -74,8 +75,6 @@ tags: ["算法与数据结构", "algorithms", "data structure"]
    + 分析算法——效率
 
 ## 算法的相关概念
-
----
 
 1. 问题及实例
    

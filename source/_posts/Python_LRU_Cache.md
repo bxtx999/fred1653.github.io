@@ -4,6 +4,7 @@ date: 2020-12-30 00:12:53
 tags: ["lru", "functools"]
 categories: ["Python", "functools"]
 desc: 在 Python 中的 functools 模块是应用高阶函数，即参数或（和）返回值为其他函数的函数。通常来说，此模块的功能适用于所有可调用对象。
+toc: true
 ---
 
 ## functools.lru_cache

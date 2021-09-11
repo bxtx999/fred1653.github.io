@@ -3,10 +3,11 @@ title: Pin学习1
 date: "2016-11-16 09:28:56"
 categories: ["OS", "计算机性能"]
 tags: "Pin"
+toc: true
 ---
 
 
-### 什么是插桩（Instrumentation）?
+## 什么是插桩（Instrumentation）?
 向程序注入额外的代码来收集程序运行时的状态。
 
 插桩（Instrumentation）的方法：
@@ -17,13 +18,13 @@ tags: "Pin"
 
   <!-- more -->
 
-### 为何使用动态指令注入？
+## 为何使用动态指令注入？
 * 不需要重新编译或重新链接
 * 在运行时检测代码
 * 处理动态生成的代码
 * 附加到运行的进程中
 
-### Pin工具的有点
+## Pin工具的有点
 1. 简单易用
   * 使用动态指令插入方式
      —— 不需要修改源代码、重新编译、重新连接
@@ -37,7 +38,7 @@ tags: "Pin"
 1. 高效
   * 适用编辑器优化(Applies compiler optimizations on instrumentation code)
 
-### Pin使用方式
+## Pin使用方式
 
 ```
 // 加载和注入一个程序
@@ -49,7 +50,7 @@ $ pin -t  pintool -- application
 $ pin -t pintool -pid 1234
 ```
 
-### Pin注入的API
+## Pin注入的API
 + 架构无关的基础API：
   * 提供确定的基础功能的API
      - Control-flow changes
@@ -60,7 +61,7 @@ $ pin -t pintool -pid 1234
   * **桩**程序（Instrumentation routines）
   * 分析程序（Analysis routines）
 
-### **桩**程序和分析程序的区别
+## **桩**程序和分析程序的区别
 **桩**和**分析**都是从ATOM工具发展来的概念。（搜索关键字 ATOM analysis  Instrumentation ）
 > ATOM，即Analysis Tools with OM， http://atominstrument.com/products-services-overview/  http://www.hpl.hp.com/techreports/Compaq-DEC/WRL-TN-44.pdf
 
@@ -71,7 +72,7 @@ $ pin -t pintool -pid 1234
 * 如 增量计数器：
     在每一次指令执行时发生
 
-### Pintool举例1——指令计数
+## Pintool举例1——指令计数
 ```
 sub $0xff, %edx
     counter++;
@@ -85,7 +86,7 @@ add $0x10, %eax
        counter++;
 ```
     
-#### 输出指令数
+### 输出指令数
 ```
 $ /bin/ls
 Makefile imageload.out itrace proccount
@@ -98,7 +99,7 @@ Count 422838
 ![输出指令数](http://ww3.sinaimg.cn/mw690/49735734gw1f9tqy8lixzj20sz0450vg.jpg)
 
 
-### Pintool举例2——指令跟踪
+## Pintool举例2——指令跟踪
 ```
 // 传递ip参数到分析程序中
 Print(ip); 
@@ -114,7 +115,7 @@ add $0x10, %eax
 Print(ip); 
 ```
 
-#### 输出轨迹
+### 输出轨迹
 ```
 $ pin -t itrace -- /bin/ls
 Makefile imageload.out itrace proccount
@@ -128,7 +129,7 @@ $ head -6 itrace.out
 0x7f20e459ea46
 ```
 
-### ManualExamples/itrace.cpp
+## ManualExamples/itrace.cpp
 ```
 #include <stdio.h>
 #include "pin.H"
@@ -148,7 +149,7 @@ return 0;
 }
 ```
 
-### 分析程序的参数举例：
+## 分析程序的参数举例：
 + IARG_INST_PTR
   * 指令指针值（program counter）
 + IARG_UINT32 <value>
@@ -160,7 +161,7 @@ return 0;
 + IARG_MEMORY_READ_EA
   * 内存读取的有效地址
 
-### 一个指令的桩的位置
+## 一个指令的桩的位置
 
 * 前置（IPOINT_BEFORE）
 
@@ -172,10 +173,10 @@ return 0;
 注： 红色代表 IPOINT_BEFORE， 绿色代表 IPOINT_AFTER，黑色代表  IPOINT_TAKEN_BRANCH。
 
 
-### 来源
+## 来源
 
 http://www.cs.du.edu/~dconnors/courses/comp3361/notes/PinTutorial
 
-### 参考
+## 参考
 http://terenceli.github.io/技术/2014/01/02/intro-to-pin
 http://huirong.github.io/2015/12/30/Intel-Pin-introduction/#参考文献

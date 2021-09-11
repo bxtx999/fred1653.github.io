@@ -4,6 +4,7 @@ updated: 2021-08-25 22:36:41
 categories: "算法"
 tags: ["算法与数据结构", "algorithms", "data structure", "分治策略"]
 desc: 分治策略
+toc: true
 ---
 
 ## 算法设计思想
