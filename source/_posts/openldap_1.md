@@ -4,6 +4,7 @@ date: 2021-09-11 23:19:19
 tags: ["openldap"]
 categories: ["openldap"]
 desc: Openldap
+toc: true
 ---
 
 Openldap的`docker-compose.yml`文件：

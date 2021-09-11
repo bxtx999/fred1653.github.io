@@ -3,10 +3,11 @@ title: Social computing 5 —— 博弈论
 date: "2020-04-02 13:59:20"
 categories: "社会计算"
 tags: ["社会计算", "博弈论"]
+toc: true
 ---
 
 
-#### 博弈论的基本概念
+## 博弈论的基本概念
 
 1. 博弈（game）
    
