@@ -167,7 +167,6 @@ module.exports = class extends Component {
             <link rel="stylesheet" href={fontCssUrl[variant]} />
             <link rel="stylesheet" href={url_for('/css/' + variant + '.css')} />
             <link rel="stylesheet" href={url_for('/css/custom.css')} />
-            <link rel="stylesheet" href={url_for('/css/cyberpunk.css')} />
             <link rel="stylesheet" href={url_for('/css/style.css')} />
             <Plugins site={site} config={config} helper={helper} page={page} head={true} />
 
