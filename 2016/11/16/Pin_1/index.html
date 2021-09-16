@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Pin学习1 - Hoooo的研究</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hoooo的研究"><meta name="msapplication-TileImage" content="/img/2.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoooo的研究"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="什么是插桩（Instrumentation）? 向程序注入额外的代码来收集程序运行时的状态。 插桩（Instrumentation）的方法：   源代码插桩（source instrumentation） ——对源码进行操作   二进制插桩（Binary instrumentation） ——运行时直接注入"><meta property="og:type" content="blog"><meta property="og:title" content="Pin学习1"><meta property="og:url" content="https://hoooo.org/2016/11/16/Pin_1/"><meta property="og:site_name" content="Hoooo的研究"><meta property="og:description" content="什么是插桩（Instrumentation）? 向程序注入额外的代码来收集程序运行时的状态。 插桩（Instrumentation）的方法：   源代码插桩（source instrumentation） ——对源码进行操作   二进制插桩（Binary instrumentation） ——运行时直接注入"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://ww3.sinaimg.cn/mw690/49735734gw1f9tqy8lixzj20sz0450vg.jpg"><meta property="og:image" content="http://ww4.sinaimg.cn/mw690/49735734gw1f9tqyeuv6bj20nq05aaak.jpg"><meta property="article:published_time" content="2016-11-16T01:28:56.000Z"><meta property="article:modified_time" content="2016-11-16T01:28:56.000Z"><meta property="article:author" content="Hu"><meta property="article:tag" content="Pin"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="http://ww3.sinaimg.cn/mw690/49735734gw1f9tqy8lixzj20sz0450vg.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoooo.org"},"headline":"Hoo的个人笔记","image":["http://ww3.sinaimg.cn/mw690/49735734gw1f9tqy8lixzj20sz0450vg.jpg","http://ww4.sinaimg.cn/mw690/49735734gw1f9tqyeuv6bj20nq05aaak.jpg"],"datePublished":"2016-11-16T01:28:56.000Z","dateModified":"2016-11-16T01:28:56.000Z","author":{"@type":"Person","name":"Hu"},"publisher":{"@type":"Organization","name":"Hoooo的研究","logo":{"@type":"ImageObject","url":"https://hoooo.org/img/H_logo.svg"}},"description":"Hu的个人记录。"}</script><link rel="canonical" href="https://hoooo.org/2016/11/16/Pin_1/"><link rel="alternate" href="/atom.xml" title="Hoooo的研究" type="application/atom+xml"><link rel="icon" href="/img/2.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/style.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?5fd96c2a5c9055cdab1b643ff129db84";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-65362962-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-65362962-1');</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">存档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2016-11-16T01:28:56.000Z" title="2016/11/16上午9:28:56">2016-11-16</time>发表</span><span class="level-item"><time dateTime="2016-11-16T01:28:56.000Z" title="2016/11/16上午9:28:56">2016-11-16</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/OS/">OS</a><span> / </span><a class="link-muted" href="/categories/OS/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%80%A7%E8%83%BD/">计算机性能</a></span><span class="level-item">6 分钟读完 (大约924个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Pin学习1</h1><div class="content"><h2 id="什么是插桩instrumentation"><a class="markdownIt-Anchor" href="#什么是插桩instrumentation"></a> 什么是插桩（Instrumentation）?</h2>
+<p>向程序注入额外的代码来收集程序运行时的状态。</p>
+<p>插桩（Instrumentation）的方法：</p>
+<ul>
+<li>
+<p>源代码插桩（source instrumentation）<br />
+——对源码进行操作</p>
+</li>
+<li>
+<p>二进制插桩（Binary instrumentation）<br />
+——运行时直接注入</p>
+<span id="more"></span>
+</li>
+</ul>
+<h2 id="为何使用动态指令注入"><a class="markdownIt-Anchor" href="#为何使用动态指令注入"></a> 为何使用动态指令注入？</h2>
+<ul>
+<li>不需要重新编译或重新链接</li>
+<li>在运行时检测代码</li>
+<li>处理动态生成的代码</li>
+<li>附加到运行的进程中</li>
+</ul>
+<h2 id="pin工具的有点"><a class="markdownIt-Anchor" href="#pin工具的有点"></a> Pin工具的有点</h2>
+<ol>
+<li>简单易用</li>
+</ol>
+<ul>
+<li>使用动态指令插入方式<br />
+—— 不需要修改源代码、重新编译、重新连接</li>
+</ul>
+<ol>
+<li>多平台支持</li>
+</ol>
+<ul>
+<li>支持X86、X86_64、Itanium、Xscale</li>
+<li>支持Linux、Windows、MacOS</li>
+</ul>
+<ol>
+<li>鲁棒性</li>
+</ol>
+<ul>
+<li>支持现实常见应用： 数据库、浏览器</li>
+<li>支持多线程程序</li>
+<li>支持信号(signals)</li>
+</ul>
+<ol>
+<li>高效</li>
+</ol>
+<ul>
+<li>适用编辑器优化(Applies compiler optimizations on instrumentation code)</li>
+</ul>
+<h2 id="pin使用方式"><a class="markdownIt-Anchor" href="#pin使用方式"></a> Pin使用方式</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 加载和注入一个程序</span><br><span class="line">$ pin -t  pintool -- application</span><br><span class="line">// Pin —— 注入引擎，在kit中已经提供</span><br><span class="line">//Pintool —— 注入工具，自己编写或者适用kit中提供的</span><br><span class="line"></span><br><span class="line">// 注入到一个程序中（进程号）</span><br><span class="line">$ pin -t pintool -pid 1234</span><br></pre></td></tr></table></figure>
+<h2 id="pin注入的api"><a class="markdownIt-Anchor" href="#pin注入的api"></a> Pin注入的API</h2>
+<ul>
+<li>架构无关的基础API：
+<ul>
+<li>提供确定的基础功能的API
+<ul>
+<li>Control-flow changes</li>
+<li>Memory accesses</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基于特定架构的API：
+<ul>
+<li>如基于IA32的段寄存器信息</li>
+</ul>
+</li>
+<li>基于调用（call-based）的API：
+<ul>
+<li><strong>桩</strong>程序（Instrumentation routines）</li>
+<li>分析程序（Analysis routines）</li>
+</ul>
+</li>
+</ul>
+<h2 id="桩程序和分析程序的区别"><a class="markdownIt-Anchor" href="#桩程序和分析程序的区别"></a> <strong>桩</strong>程序和分析程序的区别</h2>
+<p><strong>桩</strong>和<strong>分析</strong>都是从ATOM工具发展来的概念。（搜索关键字 ATOM analysis  Instrumentation ）</p>
+<blockquote>
+<p>ATOM，即Analysis Tools with OM， <a target="_blank" rel="noopener" href="http://atominstrument.com/products-services-overview/">http://atominstrument.com/products-services-overview/</a>  <a target="_blank" rel="noopener" href="http://www.hpl.hp.com/techreports/Compaq-DEC/WRL-TN-44.pdf">http://www.hpl.hp.com/techreports/Compaq-DEC/WRL-TN-44.pdf</a></p>
+</blockquote>
+<p>桩程序(instrumentation routines）定义了在哪里插桩；</p>
+<ul>
+<li>如在指令前 ：<br />
+在指令第一次执行时插桩<br />
+分析程序（analysis routines）定义当桩启动时执行哪些操作。</li>
+<li>如 增量计数器：<br />
+在每一次指令执行时发生</li>
+</ul>
+<h2 id="pintool举例1指令计数"><a class="markdownIt-Anchor" href="#pintool举例1指令计数"></a> Pintool举例1——指令计数</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sub $0xff, %edx</span><br><span class="line">    counter++;</span><br><span class="line">cmp %esi, %edx</span><br><span class="line">     counter++;</span><br><span class="line">jle &lt;L1&gt;</span><br><span class="line">      counter++;</span><br><span class="line">mov $0x1, %edi</span><br><span class="line">       counter++;</span><br><span class="line">add $0x10, %eax</span><br><span class="line">       counter++;</span><br></pre></td></tr></table></figure>
+<h3 id="输出指令数"><a class="markdownIt-Anchor" href="#输出指令数"></a> 输出指令数</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ /bin/ls</span><br><span class="line">Makefile imageload.out itrace proccount</span><br><span class="line">imageload inscount0 atrace itrace.out</span><br><span class="line">$ pin -t inscount0 -- /bin/ls</span><br><span class="line">Makefile imageload.out itrace proccount</span><br><span class="line">imageload inscount0 atrace itrace.out</span><br><span class="line">Count 422838 </span><br></pre></td></tr></table></figure>
+<p><img src="http://ww3.sinaimg.cn/mw690/49735734gw1f9tqy8lixzj20sz0450vg.jpg" alt="输出指令数" /></p>
+<h2 id="pintool举例2指令跟踪"><a class="markdownIt-Anchor" href="#pintool举例2指令跟踪"></a> Pintool举例2——指令跟踪</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 传递ip参数到分析程序中</span><br><span class="line">Print(ip); </span><br><span class="line">sub $0xff, %edx </span><br><span class="line">Print(ip); </span><br><span class="line">sub $0xff, %edx </span><br><span class="line">Print(ip); </span><br><span class="line">jle &lt;L1&gt;</span><br><span class="line">Print(ip); </span><br><span class="line">mov $0x1, %edi</span><br><span class="line">Print(ip); </span><br><span class="line">add $0x10, %eax</span><br><span class="line">Print(ip); </span><br></pre></td></tr></table></figure>
+<h3 id="输出轨迹"><a class="markdownIt-Anchor" href="#输出轨迹"></a> 输出轨迹</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ pin -t itrace -- /bin/ls</span><br><span class="line">Makefile imageload.out itrace proccount</span><br><span class="line">imageload inscount0 atrace itrace.out</span><br><span class="line">$ head -6 itrace.out</span><br><span class="line">0x7f20e459b2d0</span><br><span class="line">0x7f20e459b2d3</span><br><span class="line">0x7f20e459ea40</span><br><span class="line">0x7f20e459ea41</span><br><span class="line">0x7f20e459ea44</span><br><span class="line">0x7f20e459ea46</span><br></pre></td></tr></table></figure>
+<h2 id="manualexamplesitracecpp"><a class="markdownIt-Anchor" href="#manualexamplesitracecpp"></a> ManualExamples/itrace.cpp</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;pin.H&quot;</span><br><span class="line">FILE * trace;</span><br><span class="line">void printip(void *ip) &#123; fprintf(trace, &quot;%p\n&quot;, ip); &#125;  //  分析程序</span><br><span class="line">void Instruction(INS ins, void *v) &#123;</span><br><span class="line">INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)printip, IARG_INST_PTR, IARG_END);</span><br><span class="line">&#125;                                                               // 插桩程序</span><br><span class="line">void Fini(INT32 code, void *v) &#123; fclose(trace); &#125;</span><br><span class="line">int main(int argc, char * argv[]) &#123;</span><br><span class="line">trace = fopen(&quot;itrace.out&quot;, &quot;w&quot;);</span><br><span class="line">PIN_Init(argc, argv);</span><br><span class="line">INS_AddInstrumentFunction(Instruction, 0);</span><br><span class="line">PIN_AddFiniFunction(Fini, 0);</span><br><span class="line">PIN_StartProgram();</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分析程序的参数举例"><a class="markdownIt-Anchor" href="#分析程序的参数举例"></a> 分析程序的参数举例：</h2>
+<ul>
+<li>IARG_INST_PTR
+<ul>
+<li>指令指针值（program counter）</li>
+</ul>
+</li>
+<li>IARG_UINT32 <value>
+<ul>
+<li>整型值</li>
+</ul>
+</li>
+<li>IARG_REG_VALUE <register name>
+<ul>
+<li>指定寄存器的值</li>
+</ul>
+</li>
+<li>IARG_BRANCH_TARGET_ADDR
+<ul>
+<li>分支桩的目标地址</li>
+</ul>
+</li>
+<li>IARG_MEMORY_READ_EA
+<ul>
+<li>内存读取的有效地址</li>
+</ul>
+</li>
+</ul>
+<h2 id="一个指令的桩的位置"><a class="markdownIt-Anchor" href="#一个指令的桩的位置"></a> 一个指令的桩的位置</h2>
+<ul>
+<li>
+<p>前置（IPOINT_BEFORE）</p>
+</li>
+<li>
+<p>后置</p>
+<ul>
+<li>Fall-through edge（IPOINT_AFTER）</li>
+<li>Taken edge （IPOINT_TAKEN_BRANCH）</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://ww4.sinaimg.cn/mw690/49735734gw1f9tqyeuv6bj20nq05aaak.jpg" alt="桩" /><br />
+注： 红色代表 IPOINT_BEFORE， 绿色代表 IPOINT_AFTER，黑色代表  IPOINT_TAKEN_BRANCH。</p>
+<h2 id="来源"><a class="markdownIt-Anchor" href="#来源"></a> 来源</h2>
+<p><a target="_blank" rel="noopener" href="http://www.cs.du.edu/~dconnors/courses/comp3361/notes/PinTutorial">http://www.cs.du.edu/~dconnors/courses/comp3361/notes/PinTutorial</a></p>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<p><a target="_blank" rel="noopener" href="http://terenceli.github.io/%E6%8A%80%E6%9C%AF/2014/01/02/intro-to-pin">http://terenceli.github.io/技术/2014/01/02/intro-to-pin</a><br />
+<a target="_blank" rel="noopener" href="http://huirong.github.io/2015/12/30/Intel-Pin-introduction/#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">http://huirong.github.io/2015/12/30/Intel-Pin-introduction/#参考文献</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Pin学习1</p><p><a href="https://hoooo.org/2016/11/16/Pin_1/">https://hoooo.org/2016/11/16/Pin_1/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2016-11-16</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2016-11-16</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Pin/">Pin</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5ed77c944764050012743e2b&amp;product=inline-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2017/01/08/pip_pypi/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">pip源</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2016/04/26/Trie_2/"><span class="level-item">字典树Trie2</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://hoooo.org/2016/11/16/Pin_1/';
+            this.page.identifier = '2016/11/16/Pin_1/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'hoo' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200603184421.jpg" alt="Hoooo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Hoooo</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">42</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">15</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">44</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/jnhu76" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/jnhu76"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Javascript/WebGPU/"><span class="level-start"><span class="level-item">WebGPU</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">9</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%80%A7%E8%83%BD/"><span class="level-start"><span class="level-item">计算机性能</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul><li><a class="level is-mobile" href="/categories/Python/functools/"><span class="level-start"><span class="level-item">functools</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/openldap/"><span class="level-start"><span class="level-item">openldap</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%9B%BE%E8%B1%A1%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">图象处理</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB/"><span class="level-start"><span class="level-item">生活</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="level-start"><span class="level-item">社会计算</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">编程</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">读书笔记</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="level-start"><span class="level-item">运筹学</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">二月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/10/"><span class="level-start"><span class="level-item">十月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/07/"><span class="level-start"><span class="level-item">七月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/04/"><span class="level-start"><span class="level-item">四月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/12/"><span class="level-start"><span class="level-item">十二月 2017</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/01/"><span class="level-start"><span class="level-item">一月 2017</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2016/11/"><span class="level-start"><span class="level-item">十一月 2016</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2016/04/"><span class="level-start"><span class="level-item">四月 2016</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/DSL/"><span class="tag">DSL</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GPU/"><span class="tag">GPU</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Huge-Page/"><span class="tag">Huge Page</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OS/"><span class="tag">OS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pin/"><span class="tag">Pin</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SystemTap/"><span class="tag">SystemTap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/algorithms/"><span class="tag">algorithms</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/concurrency/"><span class="tag">concurrency</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/data-structure/"><span class="tag">data structure</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elf/"><span class="tag">elf</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/functools/"><span class="tag">functools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/image-processing/"><span class="tag">image processing</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lru/"><span class="tag">lru</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/openldap/"><span class="tag">openldap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pip/"><span class="tag">pip</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pypi/"><span class="tag">pypi</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/software/"><span class="tag">software</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/tricks/"><span class="tag">tricks</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%B3%E7%AD%96%E8%AE%BA/"><span class="tag">决策论</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/"><span class="tag">分治策略</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/"><span class="tag">博弈论</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE/"><span class="tag">图</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"><span class="tag">图像处理</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"><span class="tag">多线程</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E4%B8%96%E7%95%8C%E9%97%AE%E9%A2%98/"><span class="tag">小世界问题</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%82%E4%B9%98%E9%97%AE%E9%A2%98/"><span class="tag">幂乘问题</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%B6%E5%8F%91/"><span class="tag">并发</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"><span class="tag">快速排序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%83%85%E7%BB%AA/"><span class="tag">情绪</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"><span class="tag">斐波那契</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%89%E5%90%91%E5%9B%BE/"><span class="tag">有向图</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B5%81%E8%A1%8C%E6%AD%8C%E6%9B%B2/"><span class="tag">流行歌曲</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%BC%94%E5%94%B1/"><span class="tag">演唱</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="tag">社会计算</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">算法与数据结构</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%BF%E7%A8%8B/"><span class="tag">线程</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/"><span class="tag">编程范式</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E9%A1%B5%E6%8E%92%E5%BA%8F/"><span class="tag">网页排序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%80%9D%E7%BB%B4/"><span class="tag">计算思维</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="tag">运筹学</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=15ovpvd8su4sb5j9um1lhtb2j4&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="15ovpvd8su4sb5j9um1lhtb2j4" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#什么是插桩instrumentation"><span class="level-left"><span class="level-item">1</span><span class="level-item"> 什么是插桩（Instrumentation）?</span></span></a></li><li><a class="level is-mobile" href="#为何使用动态指令注入"><span class="level-left"><span class="level-item">2</span><span class="level-item"> 为何使用动态指令注入？</span></span></a></li><li><a class="level is-mobile" href="#pin工具的有点"><span class="level-left"><span class="level-item">3</span><span class="level-item"> Pin工具的有点</span></span></a></li><li><a class="level is-mobile" href="#pin使用方式"><span class="level-left"><span class="level-item">4</span><span class="level-item"> Pin使用方式</span></span></a></li><li><a class="level is-mobile" href="#pin注入的api"><span class="level-left"><span class="level-item">5</span><span class="level-item"> Pin注入的API</span></span></a></li><li><a class="level is-mobile" href="#桩程序和分析程序的区别"><span class="level-left"><span class="level-item">6</span><span class="level-item"> 桩程序和分析程序的区别</span></span></a></li><li><a class="level is-mobile" href="#pintool举例1指令计数"><span class="level-left"><span class="level-item">7</span><span class="level-item"> Pintool举例1——指令计数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#输出指令数"><span class="level-left"><span class="level-item">7.1</span><span class="level-item"> 输出指令数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#pintool举例2指令跟踪"><span class="level-left"><span class="level-item">8</span><span class="level-item"> Pintool举例2——指令跟踪</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#输出轨迹"><span class="level-left"><span class="level-item">8.1</span><span class="level-item"> 输出轨迹</span></span></a></li></ul></li><li><a class="level is-mobile" href="#manualexamplesitracecpp"><span class="level-left"><span class="level-item">9</span><span class="level-item"> ManualExamples/itrace.cpp</span></span></a></li><li><a class="level is-mobile" href="#分析程序的参数举例"><span class="level-left"><span class="level-item">10</span><span class="level-item"> 分析程序的参数举例：</span></span></a></li><li><a class="level is-mobile" href="#一个指令的桩的位置"><span class="level-left"><span class="level-item">11</span><span class="level-item"> 一个指令的桩的位置</span></span></a></li><li><a class="level is-mobile" href="#来源"><span class="level-left"><span class="level-item">12</span><span class="level-item"> 来源</span></span></a></li><li><a class="level is-mobile" href="#参考"><span class="level-left"><span class="level-item">13</span><span class="level-item"> 参考</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a><p class="is-size-7"><span>&copy; 2021 Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="/js/custom.js" defer></script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

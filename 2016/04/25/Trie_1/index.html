@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Trie字典树 - Hoooo的研究</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hoooo的研究"><meta name="msapplication-TileImage" content="/img/2.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoooo的研究"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="一、字典树 字典树——Trie树，又称为前缀树（Prefix Tree）、单词查找树或键树，是一种多叉树结构。 上图是一棵__Trie__树，表示了关键字集合{“a”, “to”, “tea”, “ted”, “ten”, “i”, “in”, “inn”} 。从上图可以归纳出Trie树的基本性质：   根节点不包含字符，除根节点外的每一个子节点都包含一个字符。   从根节点到某一个节点，路径上"><meta property="og:type" content="blog"><meta property="og:title" content="Trie字典树"><meta property="og:url" content="https://hoooo.org/2016/04/25/Trie_1/"><meta property="og:site_name" content="Hoooo的研究"><meta property="og:description" content="一、字典树 字典树——Trie树，又称为前缀树（Prefix Tree）、单词查找树或键树，是一种多叉树结构。 上图是一棵__Trie__树，表示了关键字集合{“a”, “to”, “tea”, “ted”, “ten”, “i”, “in”, “inn”} 。从上图可以归纳出Trie树的基本性质：   根节点不包含字符，除根节点外的每一个子节点都包含一个字符。   从根节点到某一个节点，路径上"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://hoooo.org/img/og_image.png"><meta property="article:published_time" content="2016-04-25T15:28:56.000Z"><meta property="article:modified_time" content="2016-04-25T15:28:56.000Z"><meta property="article:author" content="Hu"><meta property="article:tag" content="算法"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoooo.org"},"headline":"Hoo的个人笔记","image":["https://hoooo.org/img/og_image.png"],"datePublished":"2016-04-25T15:28:56.000Z","dateModified":"2016-04-25T15:28:56.000Z","author":{"@type":"Person","name":"Hu"},"publisher":{"@type":"Organization","name":"Hoooo的研究","logo":{"@type":"ImageObject","url":"https://hoooo.org/img/H_logo.svg"}},"description":"Hu的个人记录。"}</script><link rel="canonical" href="https://hoooo.org/2016/04/25/Trie_1/"><link rel="alternate" href="/atom.xml" title="Hoooo的研究" type="application/atom+xml"><link rel="icon" href="/img/2.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/style.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?5fd96c2a5c9055cdab1b643ff129db84";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-65362962-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-65362962-1');</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">存档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2016-04-25T15:28:56.000Z" title="2016/4/25下午11:28:56">2016-04-25</time>发表</span><span class="level-item"><time dateTime="2016-04-25T15:28:56.000Z" title="2016/4/25下午11:28:56">2016-04-25</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span><span class="level-item">20 分钟读完 (大约3063个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Trie字典树</h1><div class="content"><h2 id="一-字典树"><a class="markdownIt-Anchor" href="#一-字典树"></a> 一、字典树</h2>
+<p><strong>字典树</strong>——Trie树，又称为前缀树（Prefix Tree）、单词查找树或键树，是一种多叉树结构。</p>
+<p>上图是一棵__Trie__树，表示了关键字集合{“a”, “to”, “tea”, “ted”, “ten”, “i”, “in”, “inn”} 。从上图可以归纳出Trie树的基本性质：</p>
+<ol>
+<li>
+<p>根节点不包含字符，除根节点外的每一个子节点都包含一个字符。</p>
+</li>
+<li>
+<p>从根节点到某一个节点，路径上经过的字符连接起来，为该节点对应的字符串。</p>
+</li>
+<li>
+<p>每个节点的所有子节点包含的字符互不相同。</p>
+<ul>
+<li>通常在实现的时候，会在结点结构中设置一个标志，用来标记该节点处是否构成一个单词（关键字）。</li>
+<li>可以看出，Trie树的关键字一般都是字符串，而且Trie树把每个关键字保存在一条路径上，而不是一个节点中。另外，有两个公共前缀的关键字，在Trie树种前缀部分的路径相同。所以Trie又称为前缀树。</li>
+</ul>
+</li>
+</ol>
+<span id="more"></span>
+<h2 id="二-字典树的优缺点"><a class="markdownIt-Anchor" href="#二-字典树的优缺点"></a> 二、字典树的优缺点</h2>
+<h3 id="优点"><a class="markdownIt-Anchor" href="#优点"></a> 优点</h3>
+<ol>
+<li>
+<p>插入和查询的效率很高，均是O（m），其中m是待插入/查询的字符串长度。</p>
+<ul>
+<li>关于查询，有人会说hash表时间复杂度是O（1）不是更快？但是哈希搜索的效率取决于哈希函数的好坏，若一个坏的hash函数导致了很多冲突，效率不一定比Trie树高</li>
+</ul>
+</li>
+<li>
+<p>Trie树中不同的关键字不会产生冲突。</p>
+</li>
+<li>
+<p>Trie树中只有在允许一个关键字关联多个值的情况下才有类似hash碰撞发生。</p>
+</li>
+<li>
+<p>Trie树不用求hash值，对短字符串有更快的速度。通常，求hash值也是需要遍历字符串的。</p>
+</li>
+<li>
+<p>Trie树可以对关键字按照字典序排序。</p>
+<ul>
+<li>字典排序（lexicographical order）是一种对于随机变量形成序列的排序方法。其方法是，按照字母顺序，或者数字小大顺序，由小到大的形成序列。</li>
+</ul>
+</li>
+<li>
+<p>每一颗Trie树都可以被看做一个简单版的确定有限状态的自动机（DFA，deterministic finite automation），也就是说，对于一个任意给定属于该自动机的状态（①）和一个属于该自动机字母表的字符（②），都可以根据给定的转移函数（③）转到下一个状态。其中：</p>
+<ul>
+<li>① 对于Trie树的每一个节点都确定一个自动机的状态。</li>
+<li>② 给定一个属于该自动机字母表的字符，在图中可以看到根据不同字符形成的分支；</li>
+<li>③ 从当前节点进入下一层次节点的过程进过状态转移函数得出。</li>
+</ul>
+</li>
+</ol>
+<p>核心思想是：空间换时间，利用字符串的公共前缀来减少无谓的字符串比较以达到提高查询效率的目的。</p>
+<h3 id="缺点"><a class="markdownIt-Anchor" href="#缺点"></a> 缺点</h3>
+<ol>
+<li>
+<p>当hash函数很好时，Trie树的查找效率低于哈希搜索。</p>
+</li>
+<li>
+<p>空间消耗大。</p>
+</li>
+</ol>
+<h2 id="三-trie树的应用"><a class="markdownIt-Anchor" href="#三-trie树的应用"></a> 三、Trie树的应用</h2>
+<ol>
+<li>字符串检索</li>
+</ol>
+<p>检索、查询功能是Trie树最原始功能，思路就是从根节点开始一个一个字符进行比较。</p>
+<ul>
+<li>如果沿路比较，发现不同的字符，则表示该字符串在集合中不存在。</li>
+<li>如果所有的字符全部比较并且完全相同，还需要判断最后一个节点标识位（标记该节点是否为一个关键字）。</li>
+</ul>
+<ol>
+<li>
+<p>词频统计</p>
+<p>Trie树常被搜索引擎用于文本词频统计。</p>
+<p>思路：为了实现词频统计，我们修改了节点结构，用一个整型变量<code>count</code>来计数。对每一个关键字执行插入操作，若已存在，计数加1，若不存在，插入后<code>count</code>置 1。</p>
+</li>
+</ol>
+<p>、 (1. 2. 都可以用hash table做)</p>
+<ol>
+<li>
+<p>字符串排序</p>
+<p>Trie树可以对大量字符串按字典序进行排序，思路也很简单：遍历一次所有关键字，将它们全部插入trie树，树的每个结点的所有儿子很显然地按照字母表排序，然后先序遍历输出Trie树中所有关键字即可。</p>
+</li>
+<li>
+<p>前缀匹配</p>
+<p>例如：找出一个字符串集合中所有以ab开头的字符串。我们只需要用所有字符串构造一个trie树，然后输出以a-&gt;b-&gt;开头的路径上的关键字即可。 trie树前缀匹配常用于搜索提示。如当输入一个网址，可以自动搜索出可能的选择。当没有完全匹配的搜索结果，可以返回前缀最相似的可能。</p>
+</li>
+<li>
+<p>作为辅助结构</p>
+<p>如后缀树，AC自动机</p>
+<p>有穷自动机参考<a target="_blank" rel="noopener" href="http://blog.csdn.net/yukuninfoaxiom/article/details/6057736">这里</a></p>
+</li>
+<li>
+<p><strong>与哈希表相比</strong></p>
+<p>优点：</p>
+<ul>
+<li>
+<p>trie数据查找与不完美哈希表（链表实现）在最坏情况下更快；对于trie树，最差为O（m），m为查找字符串的长度；对于不完美哈希表，会有键值冲突（不同键哈希相同），最坏为O（N），N为全部字符产生的个数。典型情况是O（m）用于哈希计算，O（1）用于数据查找。</p>
+</li>
+<li>
+<p>trie中不同键没有冲突</p>
+</li>
+<li>
+<p>trie的桶与哈希表用于存储键冲突的桶类似，仅在单个键与多个值关联时需要</p>
+</li>
+<li>
+<p>当更多的键加入到trie中，无需提供hash方法或改变hash方法</p>
+</li>
+<li>
+<p>trie通过键为条目提供字母顺序</p>
+</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>
+<p>trie数据查找在某些情况下（磁盘或随机访问时间远远高于主存）比哈希表慢</p>
+</li>
+<li>
+<p>当键值为某些类型（如浮点型），前缀链很长且前缀不是特别有意义。</p>
+</li>
+<li>
+<p>一些trie会比hash表更消耗内存。对于trie，每个字符串的每个字符都要分配内存；对于大多数hash，只需要为整个条目分配一块内存。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>与二叉搜索树</strong>相比</p>
+<p>二叉搜索树，又称二叉排序树，它满足：</p>
+<ul>
+<li>
+<p>任意节点如果左子树不为空，左子树所有节点的值都小于根节点的值；</p>
+</li>
+<li>
+<p>任意节点如果右子树不为空，右子树所有节点的值都大于根节点的值；</p>
+</li>
+<li>
+<p>左右子树也都是二叉搜索树；</p>
+</li>
+<li>
+<p>所有节点的值都不相同。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>其实二叉搜索树的优势已经在与查找、插入的时间复杂度上了，通常只有O(log n)，很多集合都是通过它来实现的。在进行插入的时候，实质上是给树添加新的叶子节点，避免了节点移动，搜索、插入和删除的复杂度等于树的高度，属于O(log n)，最坏情况下整棵树所有的节点都只有一个子节点，完全变成一个线性表，复杂度是O(n)。</p>
+<p>Trie树在最坏情况下查找要快过二叉搜索树，如果搜索字符串长度用m来表示的话，它只有O(m)，通常情况（树的节点个数要远大于搜索字符串的长度）下要远小于O(n)。</p>
+<h2 id="四-实现"><a class="markdownIt-Anchor" href="#四-实现"></a> 四、实现</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ALPHABET_SIZE 26</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">trie_node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> count;   <span class="comment">// 记录该节点代表的单词的个数</span></span><br><span class="line">    trie_node *children[ALPHABET_SIZE]; <span class="comment">// 各个子节点 </span></span><br><span class="line">&#125;*trie;</span><br><span class="line"></span><br><span class="line"><span class="function">trie_node* <span class="title">create_trie_node</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    trie_node* pNode = <span class="keyword">new</span> <span class="built_in">trie_node</span>();</span><br><span class="line">    pNode-&gt;count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;ALPHABET_SIZE; ++i)</span><br><span class="line">        pNode-&gt;children[i] = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> pNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">trie_insert</span><span class="params">(trie root, <span class="keyword">char</span>* key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    trie_node* node = root;</span><br><span class="line">    <span class="keyword">char</span>* p = key;</span><br><span class="line">    <span class="keyword">while</span>(*p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;children[*p-<span class="string">&#x27;a&#x27;</span>] == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            node-&gt;children[*p-<span class="string">&#x27;a&#x27;</span>] = <span class="built_in">create_trie_node</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        node = node-&gt;children[*p-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        ++p;</span><br><span class="line">    &#125;</span><br><span class="line">    node-&gt;count += <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查询：不存在返回0，存在返回出现的次数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trie_search</span><span class="params">(trie root, <span class="keyword">char</span>* key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    trie_node* node = root;</span><br><span class="line">    <span class="keyword">char</span>* p = key;</span><br><span class="line">    <span class="keyword">while</span>(*p &amp;&amp; node!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        node = node-&gt;children[*p-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        ++p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(node == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> node-&gt;count;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 关键字集合</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">char</span> keys[][<span class="number">8</span>] = &#123;<span class="string">&quot;the&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;there&quot;</span>, <span class="string">&quot;answer&quot;</span>, <span class="string">&quot;any&quot;</span>, <span class="string">&quot;by&quot;</span>, <span class="string">&quot;bye&quot;</span>, <span class="string">&quot;their&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">    trie root = <span class="built_in">create_trie_node</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建trie树</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">trie_insert</span>(root, keys[i]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检索字符串</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">char</span> s[][<span class="number">32</span>] = &#123;<span class="string">&quot;Present in trie&quot;</span>, <span class="string">&quot;Not present in trie&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s --- %s\n&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="built_in">trie_search</span>(root, <span class="string">&quot;the&quot;</span>)&gt;<span class="number">0</span>?s[<span class="number">0</span>]:s[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s --- %s\n&quot;</span>, <span class="string">&quot;these&quot;</span>, <span class="built_in">trie_search</span>(root, <span class="string">&quot;these&quot;</span>)&gt;<span class="number">0</span>?s[<span class="number">0</span>]:s[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s --- %s\n&quot;</span>, <span class="string">&quot;their&quot;</span>, <span class="built_in">trie_search</span>(root, <span class="string">&quot;their&quot;</span>)&gt;<span class="number">0</span>?s[<span class="number">0</span>]:s[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s --- %s\n&quot;</span>, <span class="string">&quot;thaw&quot;</span>, <span class="built_in">trie_search</span>(root, <span class="string">&quot;thaw&quot;</span>)&gt;<span class="number">0</span>?s[<span class="number">0</span>]:s[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>对于Trie树，我们一般只实现插入和搜索操作。这段代码可以用来检索单词和统计词频。</p>
+<h2 id="五-trie树改进"><a class="markdownIt-Anchor" href="#五-trie树改进"></a> 五、Trie树改进</h2>
+<ol>
+<li>
+<p><strong>按位树（Btiwise Trie）</strong>：原理上和普通Trie树差不多，只不过普通Trie树存储的最小单位是字符，但是Bitwise Trie存放的是位而已。位数据的存取由CPU指令一次直接实现，对于二进制数据，它理论上要比普通Trie树快。</p>
+</li>
+<li>
+<p><strong>节点压缩</strong></p>
+<ul>
+<li>
+<p>①分支压缩： 对于稳定的Trie树，基本上都是查找和读取的操作，完全可以把一些分支进行压缩。例如，下图中最右侧分支inn可以直接压缩成一个节点“inn”，而不需要作为一个常规子树存在。<strong>Radix树</strong>就是根据这个原理来解决Trie树过深的问题。</p>
+</li>
+<li>
+<p>②节点映射表：这种方式也是Trie树节点可能几乎完全确定下采用的，针对Trie树节点的每一个状态，如果状态总数重复很多的话，通过一个元素为数字的多维数组（比如Triple Array Trie）来表示，这样存储Trie树本身的空间开销会小一些，虽然引入了额外的映射表。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>双数组TRIE树（Double Array Trie）</strong></p>
+<p>它在保证Trie树检索速度的前提下，提高空间利用率而提出的一种数据结构，本质上还是一个确定有限自动机。（所谓DFA就是一个能够实现状态专一的自动机，对于一个给定的属于该自动机的状态和一个数据该自动机字符表Σ的字符，它能够根据预先给定的状态转移函数转移到下一个状态。）</p>
+<p>对于DAT来说，每个节点代表自动机的一个状态， 根据变量的不同，进行状态转移，当达到结束状态或者无法转移时，完成查询。</p>
+<p>参考资料：<a target="_blank" rel="noopener" href="http://blog.csdn.net/zzran/article/details/8462002">http://blog.csdn.net/zzran/article/details/8462002</a></p>
+</li>
+</ol>
+<h2 id="六-trie树的其他形式"><a class="markdownIt-Anchor" href="#六-trie树的其他形式"></a> 六、Trie树的其他形式</h2>
+<p>上图主要说明下这些算法数据结构之间的关系。图中黄色部分主要写明了这些算法和数据结构的一些关键点。</p>
+<p>图中可以看到这样一些关系：extend-kmp 是kmp的扩展；ac自动机是kmp的多串形式；它是一个有限自动机；而trie图实际上是一个确定性有限自动机；ac自动机，trie图，后缀树实际上都是一种trie；后缀数组和后缀树都是与字符串的后缀集合有关的数据结构；trie图中的后缀指针和后缀树中的后缀链接这两个概念及其一致。</p>
+<h2 id="七-trie树的性能比较"><a class="markdownIt-Anchor" href="#七-trie树的性能比较"></a> 七、Trie树的性能比较</h2>
+<p>参考博客 <a target="_blank" rel="noopener" href="http://www.hankcs.com/nlp/performance-comparison-of-several-trie-tree.html">http://www.hankcs.com/nlp/performance-comparison-of-several-trie-tree.html</a></p>
+<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
+<ol>
+<li>
+<p>Trie树 <a target="_blank" rel="noopener" href="http://www.raychase.net/1783?replytocom=264917">http://www.raychase.net/1783?replytocom=264917</a></p>
+</li>
+<li>
+<p>Trie树 <a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/details/6897097">http://blog.csdn.net/v_july_v/article/details/6897097</a></p>
+</li>
+<li>
+<p>BitWise Trie <a target="_blank" rel="noopener" href="http://blog.csdn.net/breeze_gao/article/details/8461856">http://blog.csdn.net/breeze_gao/article/details/8461856</a></p>
+</li>
+<li>
+<p>AC自动机 <a target="_blank" rel="noopener" href="http://www.cppblog.com/menjitianya/archive/2014/07/10/207604.html">http://www.cppblog.com/menjitianya/archive/2014/07/10/207604.html</a></p>
+</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Trie字典树</p><p><a href="https://hoooo.org/2016/04/25/Trie_1/">https://hoooo.org/2016/04/25/Trie_1/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2016-04-25</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2016-04-25</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5ed77c944764050012743e2b&amp;product=inline-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2016/04/26/Trie_2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">字典树Trie2</span></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://hoooo.org/2016/04/25/Trie_1/';
+            this.page.identifier = '2016/04/25/Trie_1/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'hoo' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200603184421.jpg" alt="Hoooo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Hoooo</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">42</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">15</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">44</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/jnhu76" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/jnhu76"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Javascript/WebGPU/"><span class="level-start"><span class="level-item">WebGPU</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">9</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%80%A7%E8%83%BD/"><span class="level-start"><span class="level-item">计算机性能</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul><li><a class="level is-mobile" href="/categories/Python/functools/"><span class="level-start"><span class="level-item">functools</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/openldap/"><span class="level-start"><span class="level-item">openldap</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%9B%BE%E8%B1%A1%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">图象处理</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB/"><span class="level-start"><span class="level-item">生活</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="level-start"><span class="level-item">社会计算</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">编程</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">读书笔记</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="level-start"><span class="level-item">运筹学</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">二月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/10/"><span class="level-start"><span class="level-item">十月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/07/"><span class="level-start"><span class="level-item">七月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/04/"><span class="level-start"><span class="level-item">四月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/12/"><span class="level-start"><span class="level-item">十二月 2017</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/01/"><span class="level-start"><span class="level-item">一月 2017</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2016/11/"><span class="level-start"><span class="level-item">十一月 2016</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2016/04/"><span class="level-start"><span class="level-item">四月 2016</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/DSL/"><span class="tag">DSL</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GPU/"><span class="tag">GPU</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Huge-Page/"><span class="tag">Huge Page</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OS/"><span class="tag">OS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pin/"><span class="tag">Pin</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SystemTap/"><span class="tag">SystemTap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/algorithms/"><span class="tag">algorithms</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/concurrency/"><span class="tag">concurrency</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/data-structure/"><span class="tag">data structure</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elf/"><span class="tag">elf</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/functools/"><span class="tag">functools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/image-processing/"><span class="tag">image processing</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lru/"><span class="tag">lru</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/openldap/"><span class="tag">openldap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pip/"><span class="tag">pip</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pypi/"><span class="tag">pypi</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/software/"><span class="tag">software</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/tricks/"><span class="tag">tricks</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%B3%E7%AD%96%E8%AE%BA/"><span class="tag">决策论</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/"><span class="tag">分治策略</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/"><span class="tag">博弈论</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE/"><span class="tag">图</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"><span class="tag">图像处理</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"><span class="tag">多线程</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E4%B8%96%E7%95%8C%E9%97%AE%E9%A2%98/"><span class="tag">小世界问题</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%82%E4%B9%98%E9%97%AE%E9%A2%98/"><span class="tag">幂乘问题</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%B6%E5%8F%91/"><span class="tag">并发</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"><span class="tag">快速排序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%83%85%E7%BB%AA/"><span class="tag">情绪</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"><span class="tag">斐波那契</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%89%E5%90%91%E5%9B%BE/"><span class="tag">有向图</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B5%81%E8%A1%8C%E6%AD%8C%E6%9B%B2/"><span class="tag">流行歌曲</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%BC%94%E5%94%B1/"><span class="tag">演唱</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="tag">社会计算</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">算法与数据结构</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%BF%E7%A8%8B/"><span class="tag">线程</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/"><span class="tag">编程范式</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E9%A1%B5%E6%8E%92%E5%BA%8F/"><span class="tag">网页排序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%80%9D%E7%BB%B4/"><span class="tag">计算思维</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="tag">运筹学</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=15ovpvd8su4sb5j9um1lhtb2j4&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="15ovpvd8su4sb5j9um1lhtb2j4" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#一-字典树"><span class="level-left"><span class="level-item">1</span><span class="level-item"> 一、字典树</span></span></a></li><li><a class="level is-mobile" href="#二-字典树的优缺点"><span class="level-left"><span class="level-item">2</span><span class="level-item"> 二、字典树的优缺点</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#优点"><span class="level-left"><span class="level-item">2.1</span><span class="level-item"> 优点</span></span></a></li><li><a class="level is-mobile" href="#缺点"><span class="level-left"><span class="level-item">2.2</span><span class="level-item"> 缺点</span></span></a></li></ul></li><li><a class="level is-mobile" href="#三-trie树的应用"><span class="level-left"><span class="level-item">3</span><span class="level-item"> 三、Trie树的应用</span></span></a></li><li><a class="level is-mobile" href="#四-实现"><span class="level-left"><span class="level-item">4</span><span class="level-item"> 四、实现</span></span></a></li><li><a class="level is-mobile" href="#五-trie树改进"><span class="level-left"><span class="level-item">5</span><span class="level-item"> 五、Trie树改进</span></span></a></li><li><a class="level is-mobile" href="#六-trie树的其他形式"><span class="level-left"><span class="level-item">6</span><span class="level-item"> 六、Trie树的其他形式</span></span></a></li><li><a class="level is-mobile" href="#七-trie树的性能比较"><span class="level-left"><span class="level-item">7</span><span class="level-item"> 七、Trie树的性能比较</span></span></a></li><li><a class="level is-mobile" href="#参考资料"><span class="level-left"><span class="level-item">8</span><span class="level-item"> 参考资料</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a><p class="is-size-7"><span>&copy; 2021 Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="/js/custom.js" defer></script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

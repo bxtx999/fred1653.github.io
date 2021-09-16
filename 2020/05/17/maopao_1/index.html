@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>冒号课堂笔记(1-4课) - Hoooo的研究</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hoooo的研究"><meta name="msapplication-TileImage" content="/img/2.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoooo的研究"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="编程范式  范式译自英文的paradigm，也有译作典范、范型、范例的。所谓编程范式（programming paradigm），指的是计算机编程的基本风格或典范模式。借用哲学术语，如果说每个编程者都在创造虚拟世界，那么编程范式就是他们置身其中自觉不自觉采用德尔世界观与方法论。"><meta property="og:type" content="blog"><meta property="og:title" content="冒号课堂笔记(1-4课)"><meta property="og:url" content="https://hoooo.org/2020/05/17/maopao_1/"><meta property="og:site_name" content="Hoooo的研究"><meta property="og:description" content="编程范式  范式译自英文的paradigm，也有译作典范、范型、范例的。所谓编程范式（programming paradigm），指的是计算机编程的基本风格或典范模式。借用哲学术语，如果说每个编程者都在创造虚拟世界，那么编程范式就是他们置身其中自觉不自觉采用德尔世界观与方法论。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://hoooo.org/img/og_image.png"><meta property="article:published_time" content="2020-05-17T08:16:44.000Z"><meta property="article:modified_time" content="2020-05-17T08:16:44.000Z"><meta property="article:author" content="Hu"><meta property="article:tag" content="编程范式"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoooo.org"},"headline":"Hoo的个人笔记","image":["https://hoooo.org/img/og_image.png"],"datePublished":"2020-05-17T08:16:44.000Z","dateModified":"2020-05-17T08:16:44.000Z","author":{"@type":"Person","name":"Hu"},"publisher":{"@type":"Organization","name":"Hoooo的研究","logo":{"@type":"ImageObject","url":"https://hoooo.org/img/H_logo.svg"}},"description":"Hu的个人记录。"}</script><link rel="canonical" href="https://hoooo.org/2020/05/17/maopao_1/"><link rel="alternate" href="/atom.xml" title="Hoooo的研究" type="application/atom+xml"><link rel="icon" href="/img/2.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/style.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?5fd96c2a5c9055cdab1b643ff129db84";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-65362962-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-65362962-1');</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">存档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于我</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-05-17T08:16:44.000Z" title="2020/5/17下午4:16:44">2020-05-17</time>发表</span><span class="level-item"><time dateTime="2020-05-17T08:16:44.000Z" title="2020/5/17下午4:16:44">2020-05-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span><span class="level-item">30 分钟读完 (大约4432个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">冒号课堂笔记(1-4课)</h1><div class="content"><h2 id="编程范式"><a class="markdownIt-Anchor" href="#编程范式"></a> 编程范式</h2>
+<ol>
+<li>范式译自英文的paradigm，也有译作典范、范型、范例的。所谓编程范式（programming paradigm），指的是计算机编程的基本风格或典范模式。借用哲学术语，如果说每个编程者都在创造虚拟世界，那么编程范式就是他们置身其中自觉不自觉采用德尔世界观与方法论。</li>
+</ol>
+<span id="more"></span>
+<ol start="2">
+<li>
+<p>库（lib）与框架（framework）</p>
+<ul>
+<li>
+<p>为保证软件开发快速有效，通常采取：</p>
+<p>在宏观管理上选取框架以控制整体的结构与流程；在微观实现上利用库和工具包来解决细节问题。</p>
+</li>
+<li>
+<p>框架的意义在于使设计者在特定领域的整体设计上不必重新发明轮子；库和工具包的意义在于使开发者摆脱底层编码，专注于特定问题和业务逻辑。</p>
+</li>
+<li>
+<p>库和工具包是为给程序员带来自由的，框架是为程序员带来约束的。</p>
+</li>
+<li>
+<p>库和工具包侧重代码重用，框架侧重设计重用。</p>
+</li>
+<li>
+<p>框架是通过控制反转（IoC）机制控制全局，而库和工具包用callback知识局部的控制反转。程序员牺牲了对应用程序流程的主导权，换来的是更简洁的代码和更高的生产效率。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>设计模式是软件的战术思想，架构师软件的战略决策。与框架、库和工具包不同，他们不是软件产品，是软件思想。</p>
+<p>设计模式与惯用法都是针对常发问题的解决方法，但前者重设计，后者偏实现。</p>
+</li>
+<li>
+<p>控制反转（Inversion of Control）是一种软件设计原则，与朝哪个用的用户代码调用可重用库（library）代码不同，IoC倒转控制流方向：由库代码调用用户代码。有人将此比作好莱坞原则：”不要打电话给我们，我们会打给你的”。</p>
+</li>
+<li>
+<p>命令式编程时冯·诺依曼机运行机制的抽象。它把程序看作由若干行动指令组成的有序列表，并用变量来存储数据，用语句来执行指令。</p>
+<p>过程式编程（procedural programming）是指引入了过程（procedure）、函数（function）或子程序（subroutine/subprogram）的命令式编程。</p>
+<p>结构化编程时过程式编程的一种原则，其主要思想是：提倡在宏观上采用‘自顶向下’的设计，微观上采用顺序、选择和循环的逻辑结构，摒弃或限制<code>goto</code>语句，以保证程序结构清晰、易于调试和维护。</p>
+</li>
+<li>
+<p>命令式编程模拟电脑运算，是行动导向（Action-Oriented）的，关键在于定义解法，即“怎么做”，因而算法是显性而目标是隐性的；声明式编程模拟人脑思维，目标驱动（Goal-Driven）的，关键在于描述问题，即“做什么”，因而目标是显性而算法是隐性的。</p>
+<ul>
+<li>
+<p>命令式 → 过程式 → 结构化过程式</p>
+</li>
+<li>
+<p>声明式 → 函数式，数据流式；逻辑式，约束式；属性式；标记式、规范式等</p>
+</li>
+</ul>
+<p>函数式编程：通过数学函数的表达式变换和计算来求值。</p>
+<p>逻辑式编程：通过一系列事实和规则，利用数理逻辑来推导或论证结论。</p>
+</li>
+<li>
+<p>命令式编程的变量代表抽象化的内存，所存内容可能改变；声明式编程的变量代表抽象化的符号，所指对象一般不会改变。</p>
+<ul>
+<li>
+<p>声明式编程专注问题的分析与表达，而不是算法实现，不用指明执行顺序，一般没有或极少有副作用，也不存在内存管理问题。大大降低了编程的复杂度，也适合并发计算。</p>
+</li>
+<li>
+<p>函数式语言和逻辑式语言擅长数理逻辑的应用；</p>
+</li>
+<li>
+<p>命令式语言擅长业务逻辑的，尤其是交互式或事件驱动型应用。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>编程是寻求一种机制，将指定的输入转化为指定的输出。</p>
+<ul>
+<li>
+<p>命令式：自动机机制，通过设计指令完成从初始态到最终态的转变；</p>
+</li>
+<li>
+<p>函数式：数学变换机制，通过设计函数完成从自变量到因变量的计算；</p>
+</li>
+<li>
+<p>逻辑式：逻辑证明机制，通过逻辑推理完成从题设到结论的证明。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>OOP（Object-Oriented programming）是一种计算机编程模式，它将对象作为问题空间的基本元素，利用对象和对象间的相互作用来设计程序。</p>
+<ul>
+<li>
+<p>OOP大多是命令式，也有函数式和逻辑式的OO语言。</p>
+</li>
+<li>
+<p>OOP的核心思想可以归纳为：以数据为中心组织逻辑，将系统视为相互作用的对象集合，并利用继承与多态来增强可维护性、可扩展性与可重用性。</p>
+</li>
+<li>
+<p>过程式编程以过程为中心，自顶向下，逐步求精。</p>
+</li>
+<li>
+<p>对象式编程以数据为中心，自底向上，逐步合并。</p>
+</li>
+<li>
+<p>过程式程序的世界是君主制，OO程序的世界是民主制。</p>
+</li>
+<li>
+<p>封装使得对象拥有个体身份，继承使对象拥有家庭身份，多态使得对象拥有社会身份。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>并法式编程以进程为导向，以任务为中心，以资源共享与竞争为主线。</p>
+<ul>
+<li>
+<p>并法式编程有助于提高运行效率、充分利用资源、提高软件的响应能力、改善用户体验、保证公平竞争，同时以进程为单位将系统模块化，更加真实地模拟世界。</p>
+</li>
+<li>
+<p>合理的并发式设计应该做到：软件易于重用、维护和测试；有效地利用资源、优化程序性能；保障进程安全和活性；减少性能损失和复杂度。</p>
+</li>
+</ul>
+</li>
+<li>
+<table>
+<thead>
+<tr>
+<th>范式</th>
+<th>体系</th>
+<th>模块</th>
+<th>模块关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>过程式</td>
+<td>君主体系</td>
+<td>过程</td>
+<td>授命与听命</td>
+</tr>
+<tr>
+<td>函数式</td>
+<td>数学体系</td>
+<td>函数</td>
+<td>替换与合成</td>
+</tr>
+<tr>
+<td>逻辑式</td>
+<td>逻辑体系</td>
+<td>断言</td>
+<td>归纳与演绎</td>
+</tr>
+<tr>
+<td>对象式</td>
+<td>民主体系</td>
+<td>对象</td>
+<td>交流与服务</td>
+</tr>
+<tr>
+<td>并发式</td>
+<td>生产体系</td>
+<td>进程</td>
+<td>竞争与合作</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>STL有3要素：算法（algorithms）、容器（container）和迭代器（iterator）</p>
+<ul>
+<li>
+<p>算法是一系列切实有效的步骤；</p>
+</li>
+<li>
+<p>容器是数据的集合，可以理解为抽象的数组；</p>
+</li>
+<li>
+<p>迭代器是算法与容器之间的接口，可以理解为抽象的指针或游标。</p>
+</li>
+<li>
+<p>算法串联数据，如脊贯肉；数据实体算法，如肉附脊。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>泛型编程能够打破静态语言的数据类型之间的壁垒，在不牺牲效率并却类型安全的情况下，最大限度地提到算法的普适性。</p>
+<p>泛型变成不仅能泛化算法中涉及的概念（数据类型），还能泛化行为（函数、方法和运算）。</p>
+<p>泛型编程是以算法为导向的，以算法为中心，逐渐将其所涉及的概念内涵模糊化、外延扩大化，并将其所涉及的运算抽象化、一般化，从而提高算法的可重用性。</p>
+</li>
+<li>
+<p>领域特定语言 DSL</p>
+<ul>
+<li>DSL 一般不会一步到位地编译成机器语言或汇编语言，而是通过现成的编译器生成器（compiler-compiler 或 compiler generator）首先转化为高级语言。这样不仅大大降低了难度，也方便程序的调试。</li>
+</ul>
+</li>
+<li>
+<p>元编程 Meta-programming</p>
+<ul>
+<li>
+<p>元编程是编写、操纵程序的程序。在传统编程中，运算是动态的，但程序本身是静态的；在元编程中，二者都是动态的。</p>
+</li>
+<li>
+<p>元编程能够减少手工编程，突破原语言的语法限制，提升语言的抽象级别与灵活性，从而提高程序员的生产效率。</p>
+</li>
+<li>
+<p>许多开发工具、框架引擎之类的基础软件都有自动生成代码的功能，如许多IDE如Visual Studio、Delphi、Eclipse均能通过向导、拖放控件等方式自动生成源码；Servlet引擎将 JSP转换为Java代码。创造DSL以便高效地处理专门领域业务。自动生成重复代码，动态改变语句、函数、类等。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>SoC 就是 Separation of Concerns，即关注点分离；DRY就是Don’t repeat yourself，即尽量减少重复代码。</p>
+<p>不良代码通病：① 结构混乱或代码紊乱、松散；② 代码重复。解决此问题就是要做到——抽象与分离原则。</p>
+<p>抽象与分解的原则：单一化、正交化。</p>
+<p>每个模块职责明确专一，模块之间独立，即高内聚低耦合（high cohesion &amp; low coupling）。</p>
+</li>
+<li>
+<p>AOP</p>
+<ul>
+<li>
+<p>切面 Aspect 描述的是横切关注点（cross-cutting concerns），是与程序纵向主流执行方向横向正交的关注焦点。</p>
+</li>
+<li>
+<p>接入点是附加行为——建议（advice）的执行点，切入点（pointcut）是指切入点（join point）结合。这些接入点共享一段插入代码。切入点与建议组成切面（aspect），是模块化的横切关注点。</p>
+</li>
+<li>
+<p>AOP的实现原理：</p>
+<p>AOP的实现关键是将advice的代码嵌入到主题程序中，术语称之为编织（weaving）。编织可以分为两种：一种是静态编织，通过修改源码或字节码（bytecode）在编译器（compile-time）、后编译器（post-compile）或加载器（load-time）嵌入代码（元编程、产生式编程实现）；另一种是动态编织，通过代理（proxy）等技术在运行时（run-time）实现嵌入。</p>
+</li>
+<li>
+<p>AOP实施的3步：切面分解、切面实现和切面合成。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>事件驱动</p>
+<ul>
+<li>
+<p>采用警觉式者主动去轮询（polling），行为取决于自身的观察判断，是流程驱动的，符合常规的流程驱动式编程（Flow-Driven Programming）的模式。</p>
+</li>
+<li>
+<p>采用托付式者被动等通知（notification），行为取决于外来的突发事件，是事件驱动的，符合事件驱动式编程（Event-Driven Programming， aka EDP）的模式。</p>
+</li>
+</ul>
+<p><strong>何为事件？</strong></p>
+<p>事件是已经发生的某种令人关注的事情。在软件中，它一般表现为一个程序的某些信息状态上的变化。</p>
+<p><strong>事件分类：</strong></p>
+<p>内建事件（built-in event）：</p>
+<ul>
+<li>
+<p>底层事件（low-level event）或原生事件（native event）</p>
+<p>在用户图形界面（GUI）系统中，这类事件由鼠标、键盘等硬件设备出发；</p>
+</li>
+<li>
+<p>语义事件（semantic event）</p>
+<p>一般代表用户的行为逻辑，是若干个底层事件的组合。比如鼠标的拖放（drag-and-drop）多表示移动被拖放的对象，由鼠标按下、移动和释放三个底层事件组成。</p>
+</li>
+</ul>
+<p>用户自定义事件（user-defined event）：</p>
+<ul>
+<li>
+<p>虚拟事件（virtual event）</p>
+</li>
+<li>
+<p>原有内建事件基础上的包装。</p>
+</li>
+</ul>
+<p>此外，事件还有自然事件（natural event）和合成事件（synthetic event）。</p>
+<p><strong>事件驱动步骤：</strong></p>
+<p>实现事件处理器；注册事件处理器；实现事件循环。</p>
+<p><strong>事件驱动式的特征</strong>：</p>
+<p>被动性与异步性。控制反转导致了事件驱动式编程的****被动性passivity**。此外，事件驱动式编程还具有<strong>异步性（asynchrony）</strong> 的特征，这是由于事件的不可预测性和随机性决定的。</p>
+</li>
+<li>
+<p>回调函数（callback）</p>
+<ul>
+<li>
+<p>Callback是指能作为参数传递的函数或代码，它允许底层模块调用高层模块，使调用者与被调者从代码上解耦。异步Callback在传入后并不会立即调用，使调用者与被调者从时间上解耦。</p>
+</li>
+<li>
+<p>在C、CPP中函数指针可以实现callback。此外，抽象类（abstract class）、接口（interface）、CPP中的泛型函子（generic functor）和C#中的委托（delegate）都可以实现callback。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>控制反转一般通过callback实现，其目的是降低模块之间的依赖性，从而降低模块的耦合度和复杂度。</p>
+<p>依赖反转、控制反转和依赖注射是近义词，它们的主题是控制与依赖，目的是解耦，方法是反转，实现一切的关键是抽象接口。</p>
+<p><strong>依赖反转原则</strong>（Dependency-Inversion Principle，aka DIP）与<strong>控制反转</strong>相比更加具体——高层模块不依赖于低层模块，它们都应依赖抽象；抽象不应依赖于细节，细节应该依赖抽象。</p>
+<p>依赖注射（Dependency Injection，aka DI）——动态地为一个软件组件提供外部依赖。</p>
+</li>
+<li>
+<p>软件的可伸缩想（scalability）一般指从容应对工作量增长的能力，常与性能（performance）等指标一起考量。而<strong>控制反转</strong>的主要作用是降低模块之间的依赖性，从而降低模块的耦合度和复杂度，提高软件的可重用性、柔韧性和可扩展性。</p>
+</li>
+<li>
+<p>独立是异步的前提，耗时是异步的理由。</p>
+</li>
+<li>
+<p>观察者模式又称为发行/订阅模式，既是事件驱动式的简化，也是事件驱动式的核心思想。MVC架构是观察者模式在架构设计上的一个应用。</p>
+</li>
+<li>
+<p>函数式编程中，函数是程序的核心，是头等公民，一般没有货很少有副作用，同时没有显示的内存管理。</p>
+<p>函数式编程没有副作用（side affect）的好处：</p>
+<ul>
+<li>
+<p>没有副作用的函数易于重构、调试和单元测试。</p>
+</li>
+<li>
+<p>代码有效性与函数顺序无关，方便并发处理和优化处理。</p>
+</li>
+</ul>
+<p>没有副作用的函数式是引用透明的（referential transparency），即一个表达式随时可以用它的值来替换，如数学中的函数一样，保证了数学思维的贯彻与运用。</p>
+<p>惰性求值是需求驱动的，可以避免不必要的等待和计算。</p>
+<p>相比于过程式和OOP，函数式思想过于数学化和抽象化，语言表现力和运行效率也不足。</p>
+</li>
+<li>
+<p>代码的长度不是衡量软件复杂度的唯一标准。其中，逻辑结构越复杂、越微妙、受需求变化影响越大，软件越难控制和维护。</p>
+<p><strong>算法=逻辑+控制</strong> 。逻辑式编程将算法中的控制部分大都移交给编程语言，开发人员主要关注算法的核心逻辑。这样大大减轻了开发人员的负担，编码也更加简洁，更具有可维护性和可扩展性。</p>
+<ul>
+<li>
+<p>区别于过程式和函数式，逻辑式没有明显的输入和输出。</p>
+</li>
+<li>
+<p>逻辑式编程不仅适用于人工智能方面的学术领域，还广泛适用于各种设计知识管理、决策分析等方面的应用领域。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>相比于设计模式，编程范式针对问题领域更广泛，提出的思想和方法更为普遍适用、更抽象、更系统。此外， 设计模式重在设计，对语言和工具要求不高，而编程范式要求建立一套抽象机制和方法体系，离不开语言或工具的支持。</p>
+<ul>
+<li>编程范式的核心价值在于：突破原有编程方式的某些限制，带来新思维和新方法，从而进一步解放程序员的劳动力。</li>
+</ul>
+</li>
+<li>
+<p>闭包是一种能保存当初创建时环境变量的函数。它通常以匿名方式存在，多用于函数式编程中，能够让代码结构更加清晰简洁。Java中的匿名函数可以看做是OO化的闭包形式。</p>
+</li>
+<li>
+<p>所谓迭代学习法，是指在具体知识和抽象理论之间进行增量式的循环学习。</p>
+</li>
+</ol>
+<p>// todo. 继续整理第五课 语言小谈</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>冒号课堂笔记(1-4课)</p><p><a href="https://hoooo.org/2020/05/17/maopao_1/">https://hoooo.org/2020/05/17/maopao_1/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-05-17</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-05-17</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/">编程范式</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5ed77c944764050012743e2b&amp;product=inline-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/06/10/maopao_2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">冒号课堂笔记(5-6课)</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/15/math_base_3/"><span class="level-item">算法数学基础 - 3</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://hoooo.org/2020/05/17/maopao_1/';
+            this.page.identifier = '2020/05/17/maopao_1/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'hoo' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200603184421.jpg" alt="Hoooo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Hoooo</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">42</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">15</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">44</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/jnhu76" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/jnhu76"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Javascript/WebGPU/"><span class="level-start"><span class="level-item">WebGPU</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">9</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%80%A7%E8%83%BD/"><span class="level-start"><span class="level-item">计算机性能</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul><li><a class="level is-mobile" href="/categories/Python/functools/"><span class="level-start"><span class="level-item">functools</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/openldap/"><span class="level-start"><span class="level-item">openldap</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%9B%BE%E8%B1%A1%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">图象处理</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB/"><span class="level-start"><span class="level-item">生活</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="level-start"><span class="level-item">社会计算</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">编程</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">读书笔记</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="level-start"><span class="level-item">运筹学</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">二月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/10/"><span class="level-start"><span class="level-item">十月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/07/"><span class="level-start"><span class="level-item">七月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/04/"><span class="level-start"><span class="level-item">四月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/12/"><span class="level-start"><span class="level-item">十二月 2017</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/01/"><span class="level-start"><span class="level-item">一月 2017</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2016/11/"><span class="level-start"><span class="level-item">十一月 2016</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2016/04/"><span class="level-start"><span class="level-item">四月 2016</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/DSL/"><span class="tag">DSL</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GPU/"><span class="tag">GPU</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Huge-Page/"><span class="tag">Huge Page</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OS/"><span class="tag">OS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pin/"><span class="tag">Pin</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SystemTap/"><span class="tag">SystemTap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/algorithms/"><span class="tag">algorithms</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/concurrency/"><span class="tag">concurrency</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/data-structure/"><span class="tag">data structure</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elf/"><span class="tag">elf</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/functools/"><span class="tag">functools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/image-processing/"><span class="tag">image processing</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lru/"><span class="tag">lru</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/openldap/"><span class="tag">openldap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pip/"><span class="tag">pip</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pypi/"><span class="tag">pypi</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/software/"><span class="tag">software</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/tricks/"><span class="tag">tricks</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%B3%E7%AD%96%E8%AE%BA/"><span class="tag">决策论</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/"><span class="tag">分治策略</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/"><span class="tag">博弈论</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE/"><span class="tag">图</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"><span class="tag">图像处理</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"><span class="tag">多线程</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E4%B8%96%E7%95%8C%E9%97%AE%E9%A2%98/"><span class="tag">小世界问题</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%82%E4%B9%98%E9%97%AE%E9%A2%98/"><span class="tag">幂乘问题</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%B6%E5%8F%91/"><span class="tag">并发</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"><span class="tag">快速排序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%83%85%E7%BB%AA/"><span class="tag">情绪</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"><span class="tag">斐波那契</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%89%E5%90%91%E5%9B%BE/"><span class="tag">有向图</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B5%81%E8%A1%8C%E6%AD%8C%E6%9B%B2/"><span class="tag">流行歌曲</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%BC%94%E5%94%B1/"><span class="tag">演唱</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="tag">社会计算</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">算法与数据结构</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%BF%E7%A8%8B/"><span class="tag">线程</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/"><span class="tag">编程范式</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E9%A1%B5%E6%8E%92%E5%BA%8F/"><span class="tag">网页排序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%80%9D%E7%BB%B4/"><span class="tag">计算思维</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="tag">运筹学</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=15ovpvd8su4sb5j9um1lhtb2j4&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="15ovpvd8su4sb5j9um1lhtb2j4" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3"><!--!--></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a><p class="is-size-7"><span>&copy; 2021 Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="/js/custom.js" defer></script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
