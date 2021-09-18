@@ -248,3 +248,99 @@ _命题2_ $max$在第一阶段分组比较中总计进行了$\lceil \log n \rcei
 - 统计数据的集合$S，|S|=n$，选中位数，$k=\lceil n/2\rceil$
 
 ### 选择算法的分析
+
+#### 伪码
+
+算法 Select(S, k)
+
+1. 将S分成5个一组，共$n_M=\lceil n/5 \rceil$组
+
+2. 每组排序，中位数防盗集合M
+
+3. $m^* \gets Select(M,\lceil M/2 \rceil)$ // S分A，B，C，D
+
+4. A,D元素小于 $m^*$ 放 $S_1$，大于 $m^*$ 放 $S_2$。
+
+5. $S_1 \gets S_1 \cup C; \quad S_2 \gets S_2 \cup B$
+
+6. if $k=|S_1| + 1$ then 输出 $m^*$
+
+7. else if $k \le |S_1|$
+
+8. then    Select($S_1$,k)
+
+9. then    Select($S_2$,k-$|S_1|$-1)
+
+#### 用m*划分
+
+![m*划分](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/m*.png)
+
+$\large n=5(2r+1),|A|=|D|=2r$
+
+子问题规模至多：$\large 2r+2r+3r+2=7r+2$
+
+#### 子问题规模估计
+
+不妨设$\large n=5(2r+1)$，$\large |A|=|D|=2r$，
+
+$\large r=\frac{n/5-1}{2}=\frac{n}{10}-\frac{1}{2}$
+
+划分后子问题规模至多为:
+
+$\large 7r+2=7(\frac{n}{10}-\frac{1}{2}+2) \\ =\frac{7n}{10} - \frac{3}{2} < \frac{7n}{10}$
+
+#### 时间复杂度递推方程
+
+算法工作量$W(n)$
+
+行2：$O(n)$ // 每5个数找中位数，构成M
+
+行3：$W(n/5)$ // M中找中位数$m^*$
+
+行4：$O(n)$ // 用$m^*$划分集合S
+
+行8-9：$W(7n/10)$ // 递归
+
+$\large W(n) \le W(n/5) + W(7n/10) + O(n)$
+
+#### 递归树
+
+$\large W(n) \le W(n/5) + W(7n/10) + O(n)$
+
+![select_recursion_tree](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/select_recursion_tree.png)
+
+$\large W(n) \le cn(1+0.9+{0.9}^2+...)=O(n)$
+
+#### 讨论
+
+> 为什么使用5个一组，而不是3个一组或者7个一组？
+
+分析：**递归调用**
+
+1. 求$m^*$的工作量与$|M|=n/t$相关，$t$为每组元素数，$t$大，$|M|$小。
+
+2. 归约后子问题大小与分组元素数$t$有关，$t$大，子问题的规模大。
+
+#### 3分组时的子问题规模
+
+假设$t=3$，3个一组：
+
+![3_per_group](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/group_3_20210918.png)
+
+$n=3(2r+1) \\ r=(n/3-1)/2=n/6-1/2$
+
+子问题规模最多为$4r+1=4n/6-1$
+
+#### 算法时间复杂度
+
+算法时间复杂度满足方程：
+
+$W(n)=W(n/3)+W(4n/6)+cn$
+
+由递归树得到$W(n)=\varTheta (n \log n)$
+
+关键点：
+
+- $|M|$与归月后子问题规模值和小于$n$
+
+- 递归树每行的工作量构成公比小于1的等比级数，算法的复杂度才是$O(n)$。
