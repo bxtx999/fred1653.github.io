@@ -2,7 +2,7 @@
 title: 先进的数据结构—持久性数据结构
 date: 2021-09-30 14:23:18
 tags: ["持久性数据结构", "算法与数据结构"]
-categories: ["算法"]
+categories: ["算法与数据结构"]
 desc: 持久性存储的数据结构
 toc: true
 ---
@@ -29,7 +29,7 @@ A **pointer machine** is an "atomistic" abstract computational computational mac
 ### Partial Persistence
 
 ### Full Persistence
-W
+
 ### Confluent Persistence
 
 ### Functional Persistence

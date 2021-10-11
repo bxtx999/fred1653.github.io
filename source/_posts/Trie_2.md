@@ -1,8 +1,8 @@
 ---
 title: 字典树Trie2
 date: "2016-04-26 23:20:49"
-categories: "算法"
-tags: ["算法"]
+categories: "算法与数据结构"
+tags: ["算法", "字典树", "Trie", "前缀树"]
 toc: true
 ---
 

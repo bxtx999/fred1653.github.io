@@ -1,7 +1,7 @@
 ---
 title: 分治策略-基础.md
-updated: 2021-08-25 21:36:41
-categories: "算法"
+date: "2021-08-25 21:36:41"
+categories: "算法与数据结构"
 tags: ["算法与数据结构", "algorithms", "data structure", "分治策略"]
 desc: 分治策略
 toc: true
@@ -62,10 +62,10 @@ return 0
 二分检索问题最坏情况下的时间复杂度：
 
 $$
-W(n)=W(\lfloor n/2 \rfloor )+2 \newline
-W(1)=1 \newline
-
-解出 \quad W(n)=\lfloor\log{n} \rfloor + 1
+W(n)=W(\lfloor n/2 \rfloor )+2 \\
+W(1)=1 \\
+\implies \\
+\quad W(n)=\lfloor\log{n} \rfloor + 1
 $$
 
 ### 二分归并排序
@@ -101,7 +101,8 @@ then q ← ⌊(p+r)/2⌋   // 对半划分
 $$
 W(n)=2W(n/2)+n-1 \\
 W(1)=0 \\
-解出 \quad W(n) = n\log{n} - n + 1
+\implies \\
+\quad W(n) = n\log{n} - n + 1
 $$
 
 ### Hanoi塔的递归算法
@@ -119,8 +120,8 @@ else Hanoi(A, B, n - 1)
 
 $$
 T(n) = 2T(n-1)+1 \\
-T(1) = 1
-T(n) = 2^n - 1
+T(1) = 1 \\
+T(n) = 2^n - 1 
 $$
 
 ## 算法设计思想

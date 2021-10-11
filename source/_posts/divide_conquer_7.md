@@ -2,7 +2,7 @@
 title: 分治策略-卷积
 date: 2021-09-01 22:52:49
 tags: ["算法与数据结构", "algorithms", "data structure", "分治策略"]
-categories: "算法"
+categories: "算法与数据结构"
 desc: 分治策略的卷积算法
 toc: true
 ---

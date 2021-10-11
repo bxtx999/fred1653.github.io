@@ -1,7 +1,7 @@
 ---
 title: 贪心算法基础
 date: 2021-09-18 23:44:16
-categories: "算法"
+categories: "算法与数据结构"
 tags: ["算法与数据结构", "algorithms", "data structure", "贪心算法"]
 desc: 贪心算法（greedy algorithm），又称贪婪算法，是一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是最好或最优的算法。
 toc: true

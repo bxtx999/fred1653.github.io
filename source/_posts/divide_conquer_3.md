@@ -1,7 +1,7 @@
 ---
 title: 分治策略-快速排序.md
-updated: 2021-08-25 23:36:41
-categories: "算法"
+date: 2021-08-25 23:36:41
+categories: "算法与数据结构"
 tags: ["算法与数据结构", "algorithms", "data structure", "分治策略", "快速排序"]
 desc: 快速排序
 toc: true

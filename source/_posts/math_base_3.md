@@ -1,7 +1,7 @@
 ---
 title: 算法数学基础 - 3
 date: "2020-05-15 21:44:45"
-categories: "算法"
+categories: "算法与数据结构"
 tags: ["算法与数据结构", "algorithms", "data structure"]
 toc: true
 ---
