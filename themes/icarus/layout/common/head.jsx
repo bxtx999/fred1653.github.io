@@ -168,6 +168,7 @@ module.exports = class extends Component {
             <link rel="stylesheet" href={url_for('/css/' + variant + '.css')} />
             <link rel="stylesheet" href={url_for('/css/custom.css')} />
             <link rel="stylesheet" href={url_for('/css/style.css')} />
+            {/* <link rel="stylesheet" href="//unpkg.com/heti/umd/heti.min.css"></link> */}
             <Plugins site={site} config={config} helper={helper} page={page} head={true} />
 
             {adsenseClientId ? <script data-ad-client={adsenseClientId}
