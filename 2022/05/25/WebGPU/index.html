@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>WebGPU —— Chrome Developers - Hoooo的研究</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hoooo的研究"><meta name="msapplication-TileImage" content="/img/2.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoooo的研究"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="本文是(WebGPU - Chrome Developers)[https:&amp;#x2F;&amp;#x2F;developer.chrome.com&amp;#x2F;docs&amp;#x2F;web-platform&amp;#x2F;webgpu&amp;#x2F;]的翻译。  WebGPU支持web上的高性能3D图形和数据并行计算。"><meta property="og:type" content="blog"><meta property="og:title" content="WebGPU —— Chrome Developers"><meta property="og:url" content="https://hoooo.org/2022/05/25/WebGPU/"><meta property="og:site_name" content="Hoooo的研究"><meta property="og:description" content="本文是(WebGPU - Chrome Developers)[https:&amp;#x2F;&amp;#x2F;developer.chrome.com&amp;#x2F;docs&amp;#x2F;web-platform&amp;#x2F;webgpu&amp;#x2F;]的翻译。  WebGPU支持web上的高性能3D图形和数据并行计算。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://wd.imgix.net/image/vvhSqZboQoZZN9wBvoXq72wzGAf1/WHoJmX2IU7roV4iabH6M.png?auto=format&amp;amp;w=845"><meta property="article:published_time" content="2022-05-25T03:49:23.000Z"><meta property="article:modified_time" content="2022-05-25T03:49:23.000Z"><meta property="article:author" content="Hu"><meta property="article:tag" content="WebGPU"><meta property="article:tag" content="chrome"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://wd.imgix.net/image/vvhSqZboQoZZN9wBvoXq72wzGAf1/WHoJmX2IU7roV4iabH6M.png?auto=format&amp;amp;w=845"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoooo.org"},"headline":"Hoo的个人笔记","image":[],"datePublished":"2022-05-25T03:49:23.000Z","dateModified":"2022-05-25T03:49:23.000Z","author":{"@type":"Person","name":"Hu"},"publisher":{"@type":"Organization","name":"Hoooo的研究","logo":{"@type":"ImageObject","url":"https://hoooo.org/img/H_logo.svg"}},"description":"Hu的个人记录。"}</script><link rel="canonical" href="https://hoooo.org/2022/05/25/WebGPU/"><link rel="alternate" href="/atom.xml" title="Hoooo的研究" type="application/atom+xml"><link rel="icon" href="/img/2.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.font.im/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/style.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?5fd96c2a5c9055cdab1b643ff129db84";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-65362962-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'UA-65362962-1');</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">存档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于我</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-25T03:49:23.000Z" title="2022/5/25上午11:49:23">2022-05-25</time>发表</span><span class="level-item"><time dateTime="2022-05-25T03:49:23.000Z" title="2022/5/25上午11:49:23">2022-05-25</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/WebGPU/">WebGPU</a></span><span class="level-item">12 分钟读完 (大约1865个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">WebGPU —— Chrome Developers</h1><div class="content"><blockquote>
+<p>本文是(<em>WebGPU - Chrome Developers</em>)[<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/web-platform/webgpu/">https://developer.chrome.com/docs/web-platform/webgpu/</a>]的翻译。</p>
+</blockquote>
+<p>WebGPU支持web上的高性能3D图形和数据并行计算。</p>
+<span id="more"></span>
+<h2 id="webgpu是什么"><a class="markdownIt-Anchor" href="#webgpu是什么"></a> WebGPU是什么？</h2>
+<p>WebGPU是一个新的网络API，它暴露了现代计算机图形功能，特别是Direct3D 12、Metal和Vulkan，用于在图形处理单元（GPU）上执行渲染和计算操作。</p>
+<p><img src="https://wd.imgix.net/image/vvhSqZboQoZZN9wBvoXq72wzGAf1/WHoJmX2IU7roV4iabH6M.png?auto=format&amp;w=845" alt="" /></p>
+<p>这个目标与WebGL系列的API相似，但WebGPU能够访问GPU的更多高级功能。WebGL主要用于绘制图像，但可以通过很大的努力重新用于其他类型的计算，而WebGPU为在GPU上进行一般的计算提供一流的支持。</p>
+<p>在W3C的 &quot;网络GPU &quot;社区小组中，经过四年的开发，WebGPU现在已经准备好让开发者在Chrome中试用，并对API和着色语言提出反馈意见。</p>
+<p><strong>&quot;After a decade of WebGL bringing 3D graphics to the web and enabling all sorts of new experiences, it’s now time to upgrade the stack and help web developers take full advantage of modern graphics cards. WebGPU arrives just in time!&quot;</strong></p>
+<blockquote>
+<p>Mr.doob, Three.js 的开发者</p>
+</blockquote>
+<p><strong>WebGPU gets us closer to the metal and it also unlocks the power of compute shader for Web developers. New 3D experiences can be built today on <a target="_blank" rel="noopener" href="https://playground.babylonjs.com/#XCNL7Y">Babylon.js Playground</a>.</strong></p>
+<blockquote>
+<p>David Catuhe, Babylon.js 的开发者</p>
+</blockquote>
+
+<video src='https://storage.googleapis.com/web-dev-uploads/video/vvhSqZboQoZZN9wBvoXq72wzGAf1/Xb7LvsJ5e8efTssp94c6.mov' type='video/quicktime' controls='controls'  width='100%' height='100%'>
+</video>
+
+<blockquote>
+<p>Babylon.js的demo：使用WebGPU的计算着色器功能模拟汹涌的大海</p>
+</blockquote>
+<h2 id="现状"><a class="markdownIt-Anchor" href="#现状"></a> 现状</h2>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建解释器</td>
+<td><a target="_blank" rel="noopener" href="https://gpuweb.github.io/gpuweb/explainer/">完成</a></td>
+</tr>
+<tr>
+<td>创造规范的初始稿</td>
+<td><a target="_blank" rel="noopener" href="https://gpuweb.github.io/gpuweb/">正在进行中</a></td>
+</tr>
+<tr>
+<td>收集反馈并迭代设计</td>
+<td><a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/web-platform/webgpu/#feedback">正在进行中</a></td>
+</tr>
+<tr>
+<td>初始试验</td>
+<td><a target="_blank" rel="noopener" href="https://developer.chrome.com/origintrials/#/view_trial/118219490218475521">正在进行中</a></td>
+</tr>
+<tr>
+<td>发布</td>
+<td>未开始</td>
+</tr>
+</tbody>
+</table>
+<h2 id="如何使用-webgpu"><a class="markdownIt-Anchor" href="#如何使用-webgpu"></a> 如何使用 WebGPU</h2>
+<h3 id="通过-aboutflags-开启"><a class="markdownIt-Anchor" href="#通过-aboutflags-开启"></a> 通过 about://flags 开启</h3>
+<p>要在本地试验WebGPU，而不需要原产地试用令牌，请在<code>about://flags</code>中启用<code>#enable-unsafe-webgpu</code>标志。</p>
+<h3 id="在初始试验阶段启用支持"><a class="markdownIt-Anchor" href="#在初始试验阶段启用支持"></a> 在初始试验阶段启用支持</h3>
+<p>从Chrome 94开始，WebGPU可在Chrome中作为原产地试用。原产地试用预计将在Chrome 105（2022年9月21日）结束。</p>
+<p>原产地试验允许您尝试新功能，并就其可用性、实用性和有效性向网络标准社区提供反馈。欲了解更多信息，请参见<a target="_blank" rel="noopener" href="https://github.com/GoogleChrome/OriginTrials/blob/gh-pages/developer-guide.md">《网络开发者初始试验指南》</a>。要报名参加这项或其他初始试验，请访问<a target="_blank" rel="noopener" href="https://developers.chrome.com/origintrials/#/trials/active">注册页面</a>。</p>
+<h3 id="初始实验注册"><a class="markdownIt-Anchor" href="#初始实验注册"></a> 初始实验注册</h3>
+<ol>
+<li>
+<p>为你的初始试验<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/web-platform/webgpu/">申请一个令牌</a>。</p>
+</li>
+<li>
+<p>将令牌添加到你的页面。有两种方法可以做到这一点:</p>
+<ul>
+<li>
+<p>在每个页面的头部添加一个 origin-trial <meta> 标签。例如，这可能看起来像。</p>
+<p><code>&lt;meta http-equiv=&quot;origin-trial&quot; content=&quot;TOKEN_GOES_HERE&quot;&gt;</code></p>
+</li>
+<li>
+<p>如果你能配置你的服务器，你也可以使用<code>Origin-Trial</code> HTTP头来添加令牌。由此产生的响应头看起来应该是这样的：</p>
+<p><code>Origin-Trial: TOKEN_GOES_HERE</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="特征检测"><a class="markdownIt-Anchor" href="#特征检测"></a> 特征检测</h2>
+<p>检查是否支持WebGPU，使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">&quot;gpu&quot;</span> <span class="keyword">in</span> navigator) &#123;</span><br><span class="line">  <span class="comment">// WebGPU is supported! 🎉</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意</p>
+<p>由<code>navigator.gpu.requestAdapter()</code>返回的GPU适配器可能为<code>null</code>。</p>
+</blockquote>
+<h2 id="开始"><a class="markdownIt-Anchor" href="#开始"></a> 开始</h2>
+<p>WebGPU是一个低级别的API，就像WebGL一样。它非常强大，相当啰嗦，而且在深入研究之前需要了解关键的概念。这就是为什么我将在本文中链接到现有的高质量内容，以便你开始学习WebGPU。</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://surma.dev/things/webgpu/">WebGPU — All of the cores, none of the canvas</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.chrome.com/gpu-compute/">Get started with GPU Compute on the web</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2020/04/experimental-webgpu-in-firefox/">A Taste of WebGPU in Firefox</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://metalbyexample.com/webgpu-part-one/">WebGPU for Metal Developers, Part One</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://alain.xyz/blog/raw-webgpu">Learn what key data structures and types are needed to draw in WebGPU</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://gpuweb.github.io/gpuweb/explainer/">WebGPU Explainer</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://toji.github.io/webgpu-best-practices/">WebGPU Best Practices</a></p>
+</li>
+</ul>
+<h2 id="浏览器支持"><a class="markdownIt-Anchor" href="#浏览器支持"></a> 浏览器支持</h2>
+<p>WebGPU在ChromeOS、macOS和Windows 10的Chrome 94中的特定设备上可用，未来将支持更多设备。通过在Chrome浏览器上运行<br />
+<code>--enable-features=Vulkan</code>，可以获得Linux实验性支持。对更多平台的支持也将随之而来。</p>
+<p>完整的已知问题列表可在 <a target="_blank" rel="noopener" href="https://hackmd.io/QcdsK_g7RVKRCIIBqgs5Hw">ot-caveats</a> 中找到。</p>
+<p>在撰写本文时，<a target="_blank" rel="noopener" href="https://webkit.org/blog/9528/webgpu-and-wsl-in-safari/">Safari</a>和<a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2020/04/experimental-webgpu-in-firefox/">Firefox</a>的WebGPU支持正在进行中。</p>
+<h2 id="平台支持"><a class="markdownIt-Anchor" href="#平台支持"></a> 平台支持</h2>
+<p>就像在WebGL的世界里，一些库也实现了WebGPU。</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://dawn.googlesource.com/dawn">Dawn</a>是Chromium中使用的WebGPU的一个C<ins>实现。它可以用来在C和C</ins>应用程序中以WebGPU为目标，然后使用<a target="_blank" rel="noopener" href="https://emscripten.org/">Emscripten</a>移植到<a target="_blank" rel="noopener" href="https://developer.mozilla.org/docs/WebAssembly">WebAssembly</a>，并在浏览器中自动利用WebGPU的优势。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://sotrh.github.io/learn-wgpu/#what-is-wgpu">Wgpu</a>是Firefox中使用的WebGPU的一个Rust实现。它被Rust生态系统中的各种GPU应用所使用，例如<a target="_blank" rel="noopener" href="https://veloren.net/devblog-125/">Veloren</a>，一个多人的体素RPG。</p>
+</li>
+</ul>
+<h2 id="演示"><a class="markdownIt-Anchor" href="#演示"></a> 演示</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://austin-eng.com/webgpu-samples/">WebGPU Samples</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://toji.github.io/webgpu-metaballs/">Metaballs rendered in WebGPU</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://toji.github.io/webgpu-clustered-shading/">WebGPU Clustered Forward Shading</a></p>
+</li>
+</ul>
+<h2 id="安全与隐私"><a class="markdownIt-Anchor" href="#安全与隐私"></a> 安全与隐私</h2>
+<p>为了确保网页只能使用自己的数据，所有的命令在到达GPU之前都经过严格的验证。请查看WebGPU规范中的<a target="_blank" rel="noopener" href="https://gpuweb.github.io/gpuweb/#malicious-use">恶意使用考虑部分</a>，以了解更多有关驱动错误的安全权衡。</p>
+<h2 id="反馈"><a class="markdownIt-Anchor" href="#反馈"></a> 反馈</h2>
+<p>Chrome团队想要了解你使用WebGPU的经验。</p>
+<h2 id="告诉我们关于api的设计"><a class="markdownIt-Anchor" href="#告诉我们关于api的设计"></a> 告诉我们关于API的设计</h2>
+<p>是不是API或shading语言有什么地方没有像你预期的那样工作？或者是缺少实现你的想法所需的方法或属性？对安全模型有问题或意见？在相应的<a target="_blank" rel="noopener" href="https://github.com/gpuweb/gpuweb/issues/">gitHub-repo</a>上提交一个规格问题，或者将你的想法添加到现有问题中。</p>
+<h2 id="报告实现中出现的问题"><a class="markdownIt-Anchor" href="#报告实现中出现的问题"></a> 报告实现中出现的问题</h2>
+<p>您是否发现Chrome浏览器的实现存在错误？或者实现方式与规范不同？请在<a target="_blank" rel="noopener" href="https://new.crbug.com/">new.crbug.com</a>上提交一个错误。请确保包含尽可能多的细节，比如内部的<code>about:gpu</code>页面的内容、简单的重现说明，并在组件框中输入<code>Blink&gt;WebGPU</code>。<a target="_blank" rel="noopener" href="https://glitch.com/">glitch</a>对于分享快速而简单的重现非常有用。</p>
+<h2 id="支持webgpu"><a class="markdownIt-Anchor" href="#支持webgpu"></a> 支持WebGPU</h2>
+<p>您是否计划使用WebGPU？您的公开支持有助于Chrome团队确定功能的优先次序，并向其他浏览器供应商展示支持这些功能的重要性。</p>
+<p>使用标签<a target="_blank" rel="noopener" href="https://twitter.com/search?q=%23WebGPU&amp;src=recent_search_click&amp;f=live">#WebGPU</a>向<a target="_blank" rel="noopener" href="https://twitter.com/ChromiumDev">@ChromiumDev</a>发送一条推文，让我们知道您在哪里以及如何使用它。在StackOverflow上以<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/tagged/webgpu">#webgpu</a>为标签提问。</p>
+<h2 id="有用的链接"><a class="markdownIt-Anchor" href="#有用的链接"></a> 有用的链接</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://gpuweb.github.io/gpuweb/explainer/">Public explainer</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://gpuweb.github.io/gpuweb/">WebGPU API Spec</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://gpuweb.github.io/gpuweb/wgsl/">WebGPU Shading Language (WGSL)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://bugs.chromium.org/p/chromium/issues/detail?id=1156646">Chromium tracking bug</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://chromestatus.com/feature/6213121689518080">ChromeStatus.com entry</a></p>
+</li>
+<li>
+<p>Blink Component: <a target="_blank" rel="noopener" href="https://chromestatus.com/features#component%3ABlink%3EWebGPU">Blink&gt;WebGPU</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/w3ctag/design-reviews/issues/626">TAG Review</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://groups.google.com/a/chromium.org/g/blink-dev/c/K4_egTNAvTs/m/ApS804L_AQAJ">Intent to Experiment</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://matrix.to/#/#WebGPU:matrix.org">WebGPU’s matrix channel</a></p>
+</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>WebGPU —— Chrome Developers</p><p><a href="https://hoooo.org/2022/05/25/WebGPU/">https://hoooo.org/2022/05/25/WebGPU/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-05-25</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-05-25</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/WebGPU/">WebGPU</a><a class="link-muted mr-2" rel="tag" href="/tags/chrome/">chrome</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=5ed77c944764050012743e2b&amp;product=inline-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/05/24/ddia-1/"><span class="level-item">《设计数据密集型应用》读书笔记-第一章：可靠性、可伸缩性和可维护性</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://hoooo.org/2022/05/25/WebGPU/';
+            this.page.identifier = '2022/05/25/WebGPU/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'hoo' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200603184421.jpg" alt="Hoooo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Hoooo</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">49</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">52</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/jnhu76" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/jnhu76"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Javascript/WebGPU/"><span class="level-start"><span class="level-item">WebGPU</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">10</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%80%A7%E8%83%BD/"><span class="level-start"><span class="level-item">计算机性能</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul><li><a class="level is-mobile" href="/categories/Python/functools/"><span class="level-start"><span class="level-item">functools</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/WebGPU/"><span class="level-start"><span class="level-item">WebGPU</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/openldap/"><span class="level-start"><span class="level-item">openldap</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%9B%BE%E8%B1%A1%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">图象处理</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%94%9F%E6%B4%BB/"><span class="level-start"><span class="level-item">生活</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="level-start"><span class="level-item">社会计算</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="level-start"><span class="level-item">算法与数据结构</span></span><span class="level-end"><span class="level-item tag">17</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">编程</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">读书笔记</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="level-start"><span class="level-item">运筹学</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">二月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/10/"><span class="level-start"><span class="level-item">十月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/07/"><span class="level-start"><span class="level-item">七月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/04/"><span class="level-start"><span class="level-item">四月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/12/"><span class="level-start"><span class="level-item">十二月 2017</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/01/"><span class="level-start"><span class="level-item">一月 2017</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2016/11/"><span class="level-start"><span class="level-item">十一月 2016</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2016/04/"><span class="level-start"><span class="level-item">四月 2016</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/DSL/"><span class="tag">DSL</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GDB/"><span class="tag">GDB</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GPU/"><span class="tag">GPU</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Huge-Page/"><span class="tag">Huge Page</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OS/"><span class="tag">OS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pin/"><span class="tag">Pin</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SystemTap/"><span class="tag">SystemTap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Thread-Local-Storage/"><span class="tag">Thread-Local Storage</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Trie/"><span class="tag">Trie</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/WebGPU/"><span class="tag">WebGPU</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/algorithms/"><span class="tag">algorithms</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/chrome/"><span class="tag">chrome</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/concurrency/"><span class="tag">concurrency</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/data-structure/"><span class="tag">data structure</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ddia/"><span class="tag">ddia</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elf/"><span class="tag">elf</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/functools/"><span class="tag">functools</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/image-processing/"><span class="tag">image processing</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lru/"><span class="tag">lru</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/openldap/"><span class="tag">openldap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pip/"><span class="tag">pip</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pypi/"><span class="tag">pypi</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/software/"><span class="tag">software</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/tricks/"><span class="tag">tricks</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%B3%E7%AD%96%E8%AE%BA/"><span class="tag">决策论</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/"><span class="tag">分治策略</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%BC%80%E6%A0%91/"><span class="tag">前缀树</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/"><span class="tag">博弈论</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE/"><span class="tag">图</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"><span class="tag">图像处理</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"><span class="tag">多线程</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/"><span class="tag">字典树</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E4%B8%96%E7%95%8C%E9%97%AE%E9%A2%98/"><span class="tag">小世界问题</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B9%B6%E5%8F%91/"><span class="tag">并发</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%83%85%E7%BB%AA/"><span class="tag">情绪</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8C%81%E4%B9%85%E6%80%A7%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">持久性数据结构</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%89%E5%90%91%E5%9B%BE/"><span class="tag">有向图</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B5%81%E8%A1%8C%E6%AD%8C%E6%9B%B2/"><span class="tag">流行歌曲</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%BC%94%E5%94%B1/"><span class="tag">演唱</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A4%BE%E4%BC%9A%E8%AE%A1%E7%AE%97/"><span class="tag">社会计算</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">算法与数据结构</span><span class="tag">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%BF%E7%A8%8B/"><span class="tag">线程</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%BF%E7%A8%8B%E5%B1%80%E9%83%A8%E5%AD%98%E5%82%A8/"><span class="tag">线程局部存储</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/"><span class="tag">编程范式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E9%A1%B5%E6%8E%92%E5%BA%8F/"><span class="tag">网页排序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%80%9D%E7%BB%B4/"><span class="tag">计算思维</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"><span class="tag">贪心算法</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%BF%90%E7%AD%B9%E5%AD%A6/"><span class="tag">运筹学</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=15ovpvd8su4sb5j9um1lhtb2j4&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="15ovpvd8su4sb5j9um1lhtb2j4" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#webgpu是什么"><span class="level-left"><span class="level-item">1</span><span class="level-item"> WebGPU是什么？</span></span></a></li><li><a class="level is-mobile" href="#现状"><span class="level-left"><span class="level-item">2</span><span class="level-item"> 现状</span></span></a></li><li><a class="level is-mobile" href="#如何使用-webgpu"><span class="level-left"><span class="level-item">3</span><span class="level-item"> 如何使用 WebGPU</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#通过-aboutflags-开启"><span class="level-left"><span class="level-item">3.1</span><span class="level-item"> 通过 about://flags 开启</span></span></a></li><li><a class="level is-mobile" href="#在初始试验阶段启用支持"><span class="level-left"><span class="level-item">3.2</span><span class="level-item"> 在初始试验阶段启用支持</span></span></a></li><li><a class="level is-mobile" href="#初始实验注册"><span class="level-left"><span class="level-item">3.3</span><span class="level-item"> 初始实验注册</span></span></a></li></ul></li><li><a class="level is-mobile" href="#特征检测"><span class="level-left"><span class="level-item">4</span><span class="level-item"> 特征检测</span></span></a></li><li><a class="level is-mobile" href="#开始"><span class="level-left"><span class="level-item">5</span><span class="level-item"> 开始</span></span></a></li><li><a class="level is-mobile" href="#浏览器支持"><span class="level-left"><span class="level-item">6</span><span class="level-item"> 浏览器支持</span></span></a></li><li><a class="level is-mobile" href="#平台支持"><span class="level-left"><span class="level-item">7</span><span class="level-item"> 平台支持</span></span></a></li><li><a class="level is-mobile" href="#演示"><span class="level-left"><span class="level-item">8</span><span class="level-item"> 演示</span></span></a></li><li><a class="level is-mobile" href="#安全与隐私"><span class="level-left"><span class="level-item">9</span><span class="level-item"> 安全与隐私</span></span></a></li><li><a class="level is-mobile" href="#反馈"><span class="level-left"><span class="level-item">10</span><span class="level-item"> 反馈</span></span></a></li><li><a class="level is-mobile" href="#告诉我们关于api的设计"><span class="level-left"><span class="level-item">11</span><span class="level-item"> 告诉我们关于API的设计</span></span></a></li><li><a class="level is-mobile" href="#报告实现中出现的问题"><span class="level-left"><span class="level-item">12</span><span class="level-item"> 报告实现中出现的问题</span></span></a></li><li><a class="level is-mobile" href="#支持webgpu"><span class="level-left"><span class="level-item">13</span><span class="level-item"> 支持WebGPU</span></span></a></li><li><a class="level is-mobile" href="#有用的链接"><span class="level-left"><span class="level-item">14</span><span class="level-item"> 有用的链接</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/H_logo.svg" alt="Hoooo的研究" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="/js/custom.js" defer></script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
