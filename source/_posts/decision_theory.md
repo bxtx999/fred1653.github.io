@@ -26,7 +26,7 @@ toc: true
 
 **科学决策过程**：任何科学决策的形成都必须执行科学的决策程序。
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514110538.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514110538.png)
 
 **决策的基本要素**
 
@@ -42,7 +42,7 @@ toc: true
 
 + 损益表
   
-  ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514111032.png)
+  ![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514111032.png)
 
 ### 决策的分类
 
@@ -184,7 +184,7 @@ $S_i^*=\displaystyle\max_i(\sum_{j=1}^n p_j a_{ij})$
 
 **决策树**
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514123425.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514123425.png)
 
 + □ 表示决策节点。节点中的数字为决策后最优方案的益损期望值。从它引出的分支是方案分支。
 
@@ -226,7 +226,7 @@ $P(A_m|B)=\frac{P(A_m)P(B|A_m)}{\displaystyle\sum_iP(A_i)P(B|A_i)}, \quad m=1,2,
 
 贝努利（D. Berneulli）首次提出效用概念，他用下图表示出人们对钱财的真实价值的考虑与其钱财拥有量之间的关系，这就是贝努利货币效用函数。
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514123652.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514123652.png)
 
 **效用**是一种相对的指标值，它的大小表示决策者对于风险的态度，对某事物的倾向、偏差等主观因素的强弱程度。
 
@@ -259,7 +259,7 @@ $$
 
 不同决策者对待风险态度不同，因而会得到不同形状的效用曲线。一般可分为保守型I、中间型II、风险型III，如下图
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514124538.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200514124538.png)
 
 图中I为保守型，其特点为：当收益指较小时，效用值增加较快；随收益值增大时，效用值增加速度变慢，表明决策者不求大利，谨慎小心、保守。
 

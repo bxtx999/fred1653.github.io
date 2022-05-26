@@ -41,11 +41,11 @@ toc: true
 
 - 最大位数为数深
 
-![二叉树表示](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-46-25.png)
+![二叉树表示](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-46-25.png)
 
 平均传输位数计算公式：$B=\sum\limits_{i=1}^{n}f(x_i)d(x_i)$
 
-![平均传输位数](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-47-29.png)
+![平均传输位数](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-47-29.png)
 
 计算得到：$B=[(5+5)\times 5+10\times 4+(15+10+10)\times 3+(25+20)\times 2]/100=2.85$
 
@@ -142,7 +142,7 @@ if __name__ == '__main__':
 
 能够得到下面的二叉树：
 
-![二叉树](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-47-37.png)
+![二叉树](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-47-37.png)
 
 编码为：
 
@@ -164,13 +164,13 @@ if __name__ == '__main__':
 
 **引理1**：$C$是字符集，$\forall c \in C$，$f(c)$为频率，$x,y \in C$,$f(x),f(y)$频率最小，那么存在最优二元前缀码使得$x,y$码字等长且仅在最有一位不同。
 
-![引理1](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-47-52.png)
+![引理1](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-47-52.png)
 
 $B(T)-B(T')=\sum\limits_{i \in C}f[i]d_T(i)-\sum\limits_{i \in C}f[i]d_{T'}(i) \ge 0$，其中$d_T(i)$为$i$在$T$中的层数（$i$到根的距离）。
 
 **引理2**：设$T$是二元前缀码的二叉树，$\forall x,y \in T$，$x,y$是树叶兄弟，$z$是$x,y$的父亲，令$T'=T-{x,y}$,且令$z$的频率$f(z)=f(x)+f(y)$。$T'$是对应二元前缀码$C'=(C-\{x,y\})\cup \{z\}$的二叉树，那么$B(T)=B(T')+f(x)+f(y)$。
 
-![引理2](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-48-02.png)
+![引理2](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_17-48-02.png)
 
 **引理2证明**：
 
@@ -197,7 +197,7 @@ $n=2$，字符集$C=\{x_1,x_2\}$
 对任何代码的字符至少都需要1位二进制数字。Huffman算法得到的代码是0和1，是最优前缀码。
 
 
-![最优前缀码](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_22-43-56.png)
+![最优前缀码](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_22-43-56.png)
 
 ### 归纳步骤
 
@@ -213,7 +213,7 @@ $C=\{x_1,x_2,...,x_{k+1}\}$，
 
 把$x_1,x_2$作为$z$的儿子附到$T'$上，得到树$T$，那么$T$是关于$C=(C'-\{z\}\cup \{x_1,x_2\})$的最有前缀码的二叉树。
 
-![最优前缀码](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_22-44-05.png)
+![最优前缀码](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_22-44-05.png)
 
 如果不然，则存在更优树$T^*$，$B(T^*)<B(T)$，且由引理1，其树叶兄弟是$x_1$和$x_2$。
 
@@ -233,7 +233,7 @@ $B(T^{*'})=B(T^*)-(f(x_1)+f(x_2)) \\ < B(T)-(f(x_1)+f(x_2)) \\ =B(T')$
 
 实例：$S=\{21,10,32,41,18,70\}$
 
-![两两顺序归并](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_22-44-19.png)
+![两两顺序归并](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_22-44-19.png)
 
 (1) $(21+10-1)+(32+41-1)+(18+70-1)+(31+73-1)+(104+88-1)=483$
 
@@ -245,7 +245,7 @@ $B(T^{*'})=B(T^*)-(f(x_1)+f(x_2)) \\ < B(T)-(f(x_1)+f(x_2)) \\ =B(T')$
 
 输入：$S=\{21,10,32,41,18,70\}$
 
-![Huffman树归并](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_22-44-31.png)
+![Huffman树归并](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-30_22-44-31.png)
 
 代价：$(10+18)\times 4+21\times 3+(70+41+32)\times 2 - 5=456$
 

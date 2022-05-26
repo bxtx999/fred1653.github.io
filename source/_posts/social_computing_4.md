@@ -32,7 +32,7 @@ toc: true
 
 
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312210355.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312210355.png)
 
 + 出度与入度：
   
@@ -60,7 +60,7 @@ toc: true
   
   + 尽可能大的双向连通节点子集
     
-    ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312211637.png)
+    ![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312211637.png)
   
   + 在一个有向图中，不可能存在一个节点属于两个不同的强连通分量。
 
@@ -90,7 +90,7 @@ toc: true
   
   + 链入，链出，卷须（管道），游离
   
-  + SCC![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312212901.png)
+  + SCC![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312212901.png)
     
     > Furthermore, several studies have suggested that the directed graph connecting web pages has a *bowtie* shape: there are three major categories of web pages that are sometimes referred to as IN, OUT and SCC. A web surfer can pass from any page in IN to any page in SCC, by following hyperlinks. Likewise, a surfer can pass from page in SCC to any page in OUT. Finally, the surfer can surf from any page in SCC to any other page in SCC. However, it is not possible to pass from a page in SCC to any page in IN, or from a page in OUT to a page in SCC (or, consequently, IN). Notably, in several studies IN and OUT are roughly equal in size, whereas SCC is somewhat larger; most web pages fall into one of these three sets. The remaining pages form into *tubes* that are small sets of pages outside SCC that lead directly from IN to OUT, and *tendrils* that either lead nowhere from IN, or from nowhere to OUT. Figure [19.4](https://nlp.stanford.edu/IR-book/html/htmledition/the-web-graph-1.html#fig:bowtie) illustrates this structure of the Web.
     > 
@@ -98,7 +98,7 @@ toc: true
 
 + 如何按照”领结“思路，获得一个有向图的几个组成部分？
   
-  ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312213326.png)
+  ![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312213326.png)
   
   + 简化：只关心SCC，IN和OUT三个部分
   
@@ -122,7 +122,7 @@ toc: true
 
 + 有向图的“领结”表示
   
-  ![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/领结.png)
+  ![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/领结.png)
 
 总结：
 
@@ -220,7 +220,7 @@ toc: true
 
 ## 四、PageRank： 节点重要度的一种测度
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312224422.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312224422.png)
 
 基本要领：每一个节点将自己的值均分给出向邻居，每个节点将从入向邻居收到的值加起来。
 
@@ -250,11 +250,11 @@ toc: true
 
 **PageRank基本算法在某些结构上的“病态”**
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312225302.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312225302.png)
 
 从上图去掉$(G, A)$和$(F, A)$ 边，添加 $(F, G)$ 和 ${G, A}$ 两条边，得到：
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312225401.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting/img/20200312225401.png)
 
 此时，F 和 G两个节点显得很“自私”：不断吸收其他节点的价值，但不向外分享。
 

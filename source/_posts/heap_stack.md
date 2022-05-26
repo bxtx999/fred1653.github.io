@@ -23,7 +23,7 @@ toc: true
 
 <!-- more -->
 
-![进程内存分布](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/%E8%BF%9B%E7%A8%8B%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png)
+![进程内存分布](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/%E8%BF%9B%E7%A8%8B%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png)
 
 ## 栈
 
@@ -33,7 +33,7 @@ toc: true
 
 栈是自顶向下增长的，一个程序的调用栈最底部，除去入口帧（entry frame），就是`main()`函数对应的帧。随着`mian()`函数一层一层调用，栈会一层一层地扩展；调用结束后，栈会一层一层地回溯，把内存释放回去。
 
-![进程栈](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/%E8%BF%9B%E7%A8%8B%E6%A0%88.png)
+![进程栈](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/%E8%BF%9B%E7%A8%8B%E6%A0%88.png)
 
 每个栈帧包括如下信息：
 

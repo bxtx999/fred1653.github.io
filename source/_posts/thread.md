@@ -16,7 +16,7 @@ desc: 学习、理解线程相关内容。
 >
 > 2. 下图作了简化。特别是，线程栈(thread stack)的位置可能会与共享库、共享内存区域混在一起，这取决于创建线程、加载共享库，以及映射共享内存的具体顺序。而且，对于不同的Linux发行版，线程地址也会有所不同。
 
-![同时执行4个线程的进程（Linux/x86-32）](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/thread.png)
+![同时执行4个线程的进程（Linux/x86-32）](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/thread.png)
 
 ## 进程的问题
 

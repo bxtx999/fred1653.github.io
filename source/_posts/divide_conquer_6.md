@@ -273,7 +273,7 @@ _命题2_ $max$在第一阶段分组比较中总计进行了$\lceil \log n \rcei
 
 #### 用m*划分
 
-![m*划分](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/m*.png)
+![m*划分](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/m*.png)
 
 $\large n=5(2r+1),|A|=|D|=2r$
 
@@ -307,7 +307,7 @@ $\large W(n) \le W(n/5) + W(7n/10) + O(n)$
 
 $\large W(n) \le W(n/5) + W(7n/10) + O(n)$
 
-![select_recursion_tree](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/select_recursion_tree.png)
+![select_recursion_tree](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/select_recursion_tree.png)
 
 $\large W(n) \le cn(1+0.9+{0.9}^2+...)=O(n)$
 
@@ -325,7 +325,7 @@ $\large W(n) \le cn(1+0.9+{0.9}^2+...)=O(n)$
 
 假设$t=3$，3个一组：
 
-![3_per_group](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/group_3_20210918.png)
+![3_per_group](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/group_3_20210918.png)
 
 $n=3(2r+1) \\ r=(n/3-1)/2=n/6-1/2$
 

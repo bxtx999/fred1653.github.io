@@ -42,7 +42,7 @@ X=A2^{n/2}+B, \quad Y=C2^{n/2}+D.$
 $XY=AC \quad 2^n + (AD + BC) \quad 2^{n/2} + BD
 $
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/xy.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/xy.png)
 
 可以得到：
 

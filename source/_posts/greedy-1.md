@@ -46,7 +46,7 @@ toc: true
 
 $s_1=0,f_1=20,s_2=2,f_2=5,s_3=8,f_3=15$
 
-![strategy 1](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/strategy_1_20210919.png)
+![strategy 1](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/strategy_1_20210919.png)
 
 ### 策略2的反例
 
@@ -56,7 +56,7 @@ $s_1=0,f_1=20,s_2=2,f_2=5,s_3=8,f_3=15$
 
 $s_1=0,f_1=8,s_2=7,f_2=9,s_3=8,f_3=15$
 
-![strategy 2](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/strategy_2_20210919.png)
+![strategy 2](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/strategy_2_20210919.png)
 
 ### 策略3伪码
 
@@ -163,7 +163,7 @@ $$
 
 证明逻辑
 
-![logic](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/20210919_logic.png)
+![logic](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/20210919_logic.png)
 
 ### 算法正确性归纳证明
 
@@ -212,7 +212,7 @@ S'=\{i|i \in S, s_i \ge f_k\} \\
 A=\{i_1,i_2,...,i_k\} \cup B
 $$
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/20210919_stage1.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/20210919_stage1.png)
 
 $B$是$S'$的最优解。（若不然，$S'$的最优解为$B^*$，$B^*$的活动比B多，那么
 
@@ -220,7 +220,7 @@ $\quad \quad \quad B^* \cup \{1,i_2,...,i_k\}$
 
 是$S$的最优解，且比$A$的活动多，与$A$的最优性矛盾。）
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/20210919_stage2.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/20210919_stage2.png)
 
 将$S'$看成子问题，根据归纳基础，
 
@@ -230,7 +230,7 @@ $\{i_1,i_2,...,i_k\} \cup B' \\ =\{i_1,i_2,...,i_k,i_{k+1}\} \cup (B'-\{i_{k+1}\
 
 也是原问题的最优解。
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/20210919_stage3.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/20210919_stage3.png)
 
 ## 最优装载问题
 
@@ -303,7 +303,7 @@ $|I*-\{1\}|>|I-\{1\}|=|I'|$
 
 与$I'$是关于$N'$和$C'$的最优解矛盾。
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-13-43.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-13-43.png)
 
 ### 小结
 
@@ -330,7 +330,7 @@ $A=\{1,2,3,4,5\},T=\{5,8,4,10,3\},D=<10,12,15,11,20>$。
 
 $f_1(1)=0,f_1(2)=5,f_1(3)=13,f_1(4)=17,f_1(5)=27$
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-16-34.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-16-34.png)
 
 各任务延迟：0，1，2，16，10；
 
@@ -344,7 +344,7 @@ $A=\{1,2,3,4,5\},T=\{5,8,4,10,3\},D=<10,12,15,11,20>$。
 
 $f_2(1)=0,f_2(2)=5,f_2(3)=13,f_2(4)=17,f_2(5)=27$
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-16-44.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-16-44.png)
 
 各个任务延迟：0，11，12，4，10；
 
@@ -414,7 +414,7 @@ $f_2(1)=0,f_2(2)=5,f_2(3)=13,f_2(4)=17,f_2(5)=27$
 
 $t=t_0+(t_{i_1}+t_{i_2})+...+t_{i_{k}}$
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-16-58.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-16-58.png)
 
 #### 证明要点
 
@@ -440,7 +440,7 @@ $t=t_0+(t_{i_1}+t_{i_2})+...+t_{i_{k}}$
 
 #### $i$在$f_2$的延迟不超过$j$在$f_1$的延迟
 
-![](https://cdn.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-17-08.png)
+![](https://fastly.jsdelivr.net/gh/jnhu76/Image-Hosting@master/img/Snipaste_2021-09-25_21-17-08.png)
 
 $delay(f_2,i)=s+t_j+t_i-d_i$
 
